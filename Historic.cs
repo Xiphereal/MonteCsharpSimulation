@@ -9,7 +9,8 @@ namespace MonteCsharpSimulation
         {
             return
                 tasksCompletionDates
-                    .GroupBy(t => t.Date)
+                    .OrderBy(x => x)
+                    .GroupBy(x => x.Date)
                     .Select(x => new ThroughputPerDay()
                     {
                         Date = x.Key,

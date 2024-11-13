@@ -43,7 +43,7 @@ namespace MonteCsharpSimulation.Tests
         public void ThroughputForSeveralDifferentDates()
         {
             Historic
-                .ThroughputPerDay([1.February(2014), 2.March(2014)])
+                .ThroughputPerDay([1.February(2014), 2.February(2014)])
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay()
@@ -53,7 +53,7 @@ namespace MonteCsharpSimulation.Tests
                     },
                     new ThroughputPerDay()
                     {
-                        Date = 2.March(2014),
+                        Date = 2.February(2014),
                         Throughput = 1,
                     }
                 ]);
@@ -82,7 +82,7 @@ namespace MonteCsharpSimulation.Tests
                 [
                     1.February(2014),
                     1.February(2014),
-                    2.March(2014),
+                    2.February(2014),
                 ])
                 .Should().BeEquivalentTo(
                 [
@@ -93,10 +93,31 @@ namespace MonteCsharpSimulation.Tests
                     },
                     new ThroughputPerDay()
                     {
-                        Date = 2.March(2014),
+                        Date = 2.February(2014),
                         Throughput = 1,
                     }
                 ]);
+        }
+
+
+        [Test]
+        public void DatesAreSortedAscendantly()
+        {
+            Historic
+                .ThroughputPerDay([2.February(2014), 1.February(2014)])
+                .Should().BeEquivalentTo(
+                [
+                    new ThroughputPerDay()
+                    {
+                        Date = 1.February(2014),
+                        Throughput = 1,
+                    },
+                    new ThroughputPerDay()
+                    {
+                        Date = 2.February(2014),
+                        Throughput = 1,
+                    }
+                ], options => options.WithStrictOrdering());
         }
     }
 }
