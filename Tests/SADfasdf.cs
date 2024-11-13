@@ -5,7 +5,6 @@ namespace MonteCsharpSimulation.Tests
 {
     public class SADfasdf
     {
-        // Given completion dates, their frequency is computed.
         // Given the throughput per date and 1 task, a random day throughput is chosen as completion.
         // Given the throughput per date and 2 tasks, their completion is the sum of any two random days throughput.
         // A number of iterations can be specified. There are several possible completion dates.
