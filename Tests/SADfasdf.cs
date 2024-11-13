@@ -41,7 +41,7 @@ namespace MonteCsharpSimulation.Tests
         }
 
         [Test]
-        public void ThroughputForSeveralDates()
+        public void ThroughputForSeveralDifferentDates()
         {
             Historic
                 .ThroughputPerDay([1.February(2014), 2.March(2014)])
@@ -56,6 +56,21 @@ namespace MonteCsharpSimulation.Tests
                     {
                         Date = 2.March(2014),
                         Throughput = 1,
+                    }
+                ]);
+        }
+
+        [Test]
+        public void ThroughputForDate_IsItsNumberOfOcurrences()
+        {
+            Historic
+                .ThroughputPerDay([1.February(2014), 1.February(2014)])
+                .Should().BeEquivalentTo(
+                [
+                    new ThroughputPerDay()
+                    {
+                        Date = 1.February(2014),
+                        Throughput = 2,
                     }
                 ]);
         }

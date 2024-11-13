@@ -8,11 +8,13 @@ namespace MonteCsharpSimulation
             IEnumerable<DateTime> tasksCompletionDates)
         {
             return
-                tasksCompletionDates.Select(date => new ThroughputPerDay()
-                {
-                    Date = date,
-                    Throughput = 1,
-                });
+                tasksCompletionDates
+                    .GroupBy(t => t.Date)
+                    .Select(x => new ThroughputPerDay()
+                    {
+                        Date = x.Key,
+                        Throughput = x.Count(),
+                    });
         }
     }
 }
