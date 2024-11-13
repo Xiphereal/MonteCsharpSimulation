@@ -99,7 +99,6 @@ namespace MonteCsharpSimulation.Tests
                 ]);
         }
 
-
         [Test]
         public void DatesAreSortedAscendantly()
         {
@@ -118,6 +117,35 @@ namespace MonteCsharpSimulation.Tests
                         Throughput = 1,
                     }
                 ], options => options.WithStrictOrdering());
+        }
+
+        [Test]
+        public void DaysWhereNoTaskHasBeenCompleted_AreTakenIntoAccount()
+        {
+            Historic
+                .ThroughputPerDay(
+                [
+                    1.February(2014),
+                    3.February(2014),
+                ])
+                .Should().BeEquivalentTo(
+                [
+                    new ThroughputPerDay()
+                    {
+                        Date = 1.February(2014),
+                        Throughput = 2,
+                    },
+                    new ThroughputPerDay()
+                    {
+                        Date = 2.February(2014),
+                        Throughput = 0,
+                    },
+                    new ThroughputPerDay()
+                    {
+                        Date = 3.February(2014),
+                        Throughput = 1,
+                    }
+                ]);
         }
     }
 }
