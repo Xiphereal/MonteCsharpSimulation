@@ -133,7 +133,7 @@ namespace MonteCsharpSimulation.Tests
                     new ThroughputPerDay()
                     {
                         Date = 1.February(2014),
-                        Throughput = 2,
+                        Throughput = 1,
                     },
                     new ThroughputPerDay()
                     {
