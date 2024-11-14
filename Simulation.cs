@@ -19,11 +19,9 @@ namespace MonteCsharpSimulation
         {
             return
             [
-                new Completion()
-                {
-                    When = new DateTime(year: 2014, month: 2, day: 1),
-                    Occurrences = 1,
-                }
+                new Completion(
+                    When: new DateTime(year: 2014, month: 2, day: 1),
+                    Occurrences: 1)
             ];
         }
     }

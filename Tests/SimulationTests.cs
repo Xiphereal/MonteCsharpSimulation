@@ -22,11 +22,7 @@ namespace MonteCsharpSimulation.Tests
                 .For(numberOfTasks: 1)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion()
-                    {
-                        When = 1.February(2014),
-                        Occurrences = 1,
-                    }
+                    new Completion(When: 1.February(2014), Occurrences: 1)
                 ]);
         }
     }
