@@ -1,0 +1,3 @@
+- refactor: encapsulate period related knowledge into Period
+- refactor: forecasted this, forecasted that...
+- refactor: abstract throughput simulation strategy
