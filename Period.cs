@@ -11,9 +11,6 @@ namespace MonteCsharpSimulation
             if (From > To)
                 throw new ArgumentException();
 
-            if (!TasksCompletionDates.Any())
-                throw new ArgumentException();
-
             if (TasksCompletionDates.Any(x => x.Date < From || x.Date > To))
                 throw new ArgumentException();
 

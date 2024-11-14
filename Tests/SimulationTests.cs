@@ -10,6 +10,20 @@ namespace MonteCsharpSimulation.Tests
         // A number of iterations can be specified. There are several possible completion dates.
 
         [Test]
+        public void NoCompletedTasks_PredictsNoCompletionDate()
+        {
+            DateTime today = 1.February(2014);
+
+            Simulation
+                .From(new Period(
+                    From: today.Subtract(2.Days()),
+                    To: today.Subtract(1.Days()),
+                    TasksCompletionDates: []))
+                .For(numberOfTasks: 1)
+                .Should().BeEmpty();
+        }
+
+        [Test]
         public void MyTestMethod()
         {
             DateTime today = 1.February(2014);

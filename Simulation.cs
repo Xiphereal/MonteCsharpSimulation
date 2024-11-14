@@ -17,6 +17,9 @@ namespace MonteCsharpSimulation
 
         public IReadOnlyList<Completion> For(int numberOfTasks)
         {
+            if (!this.tasksCompletionDates.Any())
+                return [];
+
             return
             [
                 new Completion(
