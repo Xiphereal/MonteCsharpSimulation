@@ -2,25 +2,21 @@
 {
     public class Historic
     {
-        public static IEnumerable<ThroughputPerDay> ThroughputPerDay(
-            IEnumerable<DateTime> tasksCompletionDates)
+        public static IEnumerable<ThroughputPerDay> ThroughputPerDay(Period period)
         {
             return
-                ThroughputPerDayFor(tasksCompletionDates)
+                ThroughputPerDayFor(period.TasksCompletionDates)
                     .Union(ZeroThroughputPerDayFor(
-                        DatesWithNoCompletedTask(tasksCompletionDates)))
+                        DatesWithNoCompletedTask(period)))
                     .OrderBy(x => x.Date);
         }
 
-        private static IEnumerable<DateTime> DatesWithNoCompletedTask(
-            IEnumerable<DateTime> timePeriodWithLapsus)
+        private static IEnumerable<DateTime> DatesWithNoCompletedTask(Period period)
         {
             IEnumerable<DateTime> allDates =
-                EnumerateAllInBetween(
-                    timePeriodWithLapsus.Order().First(),
-                    timePeriodWithLapsus.Order().Last());
+                EnumerateAllInBetween(period.From, period.To);
 
-            return allDates.Except(timePeriodWithLapsus);
+            return allDates.Except(period.TasksCompletionDates);
         }
 
         private static IEnumerable<ThroughputPerDay> ZeroThroughputPerDayFor(
