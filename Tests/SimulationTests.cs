@@ -24,6 +24,21 @@ namespace MonteCsharpSimulation.Tests
         }
 
         [Test]
+        public void PeriodOfSingleDay_WithATaskCompleted_PredictsTodayAsCompletionDate()
+        {
+            Simulation
+                .From(new Period(
+                    From: today.Subtract(1.Days()),
+                    To: today.Subtract(1.Days()),
+                    TasksCompletionDates: [today.Subtract(1.Days())]))
+                .For(numberOfTasks: 1)
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(When: today, Occurrences: 1)
+                ]);
+        }
+
+        [Test]
         public void MyTestMethod()
         {
             Simulation
@@ -34,7 +49,7 @@ namespace MonteCsharpSimulation.Tests
                 .For(numberOfTasks: 1)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: 1.February(2014), Occurrences: 1)
+                    new Completion(When: today, Occurrences: 1)
                 ]);
         }
     }
