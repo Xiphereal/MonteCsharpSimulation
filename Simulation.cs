@@ -3,7 +3,8 @@ namespace MonteCsharpSimulation
 {
     public class Simulation
     {
-        public static IReadOnlyList<Completion> From(IEnumerable<DateTime> historic)
+        public static IReadOnlyList<Completion> From(
+            IEnumerable<DateTime> tasksCompletionDates)
         {
             return
             [
