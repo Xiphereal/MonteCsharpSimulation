@@ -1,6 +1,4 @@
-﻿
-
-namespace MonteCsharpSimulation
+﻿namespace MonteCsharpSimulation
 {
     public class Historic
     {
@@ -30,11 +28,9 @@ namespace MonteCsharpSimulation
         {
             return dates
                 .GroupBy(x => x.Date)
-                .Select(x => new ThroughputPerDay()
-                {
-                    Date = x.Key,
-                    Throughput = 0,
-                });
+                .Select(x => new ThroughputPerDay(
+                    Date: x.Key,
+                    Throughput: 0));
         }
 
         private static IEnumerable<ThroughputPerDay> ThroughputPerDayFor(
@@ -42,11 +38,9 @@ namespace MonteCsharpSimulation
         {
             return dates
                 .GroupBy(x => x.Date)
-                .Select(x => new ThroughputPerDay()
-                {
-                    Date = x.Key,
-                    Throughput = x.Count(),
-                });
+                .Select(x => new ThroughputPerDay(
+                    Date: x.Key,
+                    Throughput: x.Count()));
         }
 
         private static IEnumerable<DateTime> EnumerateAllInBetween(

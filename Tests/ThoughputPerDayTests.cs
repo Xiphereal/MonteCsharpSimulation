@@ -12,11 +12,7 @@ namespace MonteCsharpSimulation.Tests
                 .ThroughputPerDay([1.February(2014)])
                 .Should().BeEquivalentTo(
                 [
-                    new ThroughputPerDay()
-                    {
-                        Date = 1.February(2014),
-                        Throughput = 1,
-                    }
+                    new ThroughputPerDay(Date: 1.February(2014), Throughput: 1)
                 ]);
         }
 
@@ -27,16 +23,8 @@ namespace MonteCsharpSimulation.Tests
                 .ThroughputPerDay([1.February(2014), 2.February(2014)])
                 .Should().BeEquivalentTo(
                 [
-                    new ThroughputPerDay()
-                    {
-                        Date = 1.February(2014),
-                        Throughput = 1,
-                    },
-                    new ThroughputPerDay()
-                    {
-                        Date = 2.February(2014),
-                        Throughput = 1,
-                    }
+                    new ThroughputPerDay(Date: 1.February(2014), Throughput: 1),
+                    new ThroughputPerDay(Date: 2.February(2014), Throughput:1),
                 ]);
         }
 
@@ -47,11 +35,7 @@ namespace MonteCsharpSimulation.Tests
                 .ThroughputPerDay([1.February(2014), 1.February(2014)])
                 .Should().BeEquivalentTo(
                 [
-                    new ThroughputPerDay()
-                    {
-                        Date = 1.February(2014),
-                        Throughput = 2,
-                    }
+                    new ThroughputPerDay(Date: 1.February(2014), Throughput: 2),
                 ]);
         }
 
@@ -67,16 +51,8 @@ namespace MonteCsharpSimulation.Tests
                 ])
                 .Should().BeEquivalentTo(
                 [
-                    new ThroughputPerDay()
-                    {
-                        Date = 1.February(2014),
-                        Throughput = 2,
-                    },
-                    new ThroughputPerDay()
-                    {
-                        Date = 2.February(2014),
-                        Throughput = 1,
-                    }
+                    new ThroughputPerDay(Date: 1.February(2014), Throughput: 2),
+                    new ThroughputPerDay(Date: 2.February(2014), Throughput: 1),
                 ]);
         }
 
@@ -87,16 +63,8 @@ namespace MonteCsharpSimulation.Tests
                 .ThroughputPerDay([2.February(2014), 1.February(2014)])
                 .Should().BeEquivalentTo(
                 [
-                    new ThroughputPerDay()
-                    {
-                        Date = 1.February(2014),
-                        Throughput = 1,
-                    },
-                    new ThroughputPerDay()
-                    {
-                        Date = 2.February(2014),
-                        Throughput = 1,
-                    }
+                    new ThroughputPerDay(Date: 1.February(2014), Throughput: 1),
+                    new ThroughputPerDay(Date: 2.February(2014), Throughput: 1),
                 ], options => options.WithStrictOrdering());
         }
 
@@ -111,21 +79,9 @@ namespace MonteCsharpSimulation.Tests
                 ])
                 .Should().BeEquivalentTo(
                 [
-                    new ThroughputPerDay()
-                    {
-                        Date = 1.February(2014),
-                        Throughput = 1,
-                    },
-                    new ThroughputPerDay()
-                    {
-                        Date = 2.February(2014),
-                        Throughput = 0,
-                    },
-                    new ThroughputPerDay()
-                    {
-                        Date = 3.February(2014),
-                        Throughput = 1,
-                    }
+                    new ThroughputPerDay(Date: 1.February(2014), Throughput: 1),
+                    new ThroughputPerDay(Date: 2.February(2014), Throughput: 0),
+                    new ThroughputPerDay(Date: 3.February(2014), Throughput: 1),
                 ]);
         }
     }
