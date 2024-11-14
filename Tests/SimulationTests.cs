@@ -12,8 +12,13 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void MyTestMethod()
         {
+            DateTime today = 1.February(2014);
+
             Simulation
-                .From(tasksCompletionDates: [1.February(2014)])
+                .From(new Period(
+                    From: today.Subtract(2.Days()),
+                    To: today.Subtract(1.Days()),
+                    TasksCompletionDates: [today.Subtract(1.Days())]))
                 .For(numberOfTasks: 1)
                 .Should().BeEquivalentTo(
                 [

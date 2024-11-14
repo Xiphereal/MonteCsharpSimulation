@@ -10,10 +10,9 @@ namespace MonteCsharpSimulation
             this.tasksCompletionDates = from;
         }
 
-        public static Simulation From(
-            IEnumerable<DateTime> tasksCompletionDates)
+        public static Simulation From(Period period)
         {
-            return new Simulation(from: tasksCompletionDates);
+            return new Simulation(from: period.TasksCompletionDates);
         }
 
         public IReadOnlyList<Completion> For(int numberOfTasks)
