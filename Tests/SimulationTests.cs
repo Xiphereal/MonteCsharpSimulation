@@ -14,6 +14,7 @@ namespace MonteCsharpSimulation.Tests
         {
             Simulation
                 .From(tasksCompletionDates: [1.February(2014)])
+                .For(numberOfTasks: 1)
                 .Should().BeEquivalentTo(
                 [
                     new Completion()

@@ -3,8 +3,20 @@ namespace MonteCsharpSimulation
 {
     public class Simulation
     {
-        public static IReadOnlyList<Completion> From(
+        private readonly IEnumerable<DateTime> tasksCompletionDates;
+
+        private Simulation(IEnumerable<DateTime> from)
+        {
+            this.tasksCompletionDates = from;
+        }
+
+        public static Simulation From(
             IEnumerable<DateTime> tasksCompletionDates)
+        {
+            return new Simulation(from: tasksCompletionDates);
+        }
+
+        public IReadOnlyList<Completion> For(int numberOfTasks)
         {
             return
             [
