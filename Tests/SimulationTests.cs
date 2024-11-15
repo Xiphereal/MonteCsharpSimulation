@@ -114,5 +114,23 @@ namespace MonteCsharpSimulation.Tests
                     new Completion(When: tomorrow, Occurrences: 1)
                 ]);
         }
+
+        [Test]
+        public void ForecastTakesLongerThanPeriod_ThroughputIsNotExhausted()
+        {
+            Simulation
+                .From(new Period(
+                    From: today,
+                    To: today,
+                    TasksCompletionDates: [today]))
+                .For(
+                    numberOfTasks: 2,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today)
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(When: tomorrow, Occurrences: 1)
+                ]);
+        }
     }
 }
