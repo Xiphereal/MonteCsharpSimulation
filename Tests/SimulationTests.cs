@@ -22,7 +22,10 @@ namespace MonteCsharpSimulation.Tests
                     From: today,
                     To: today,
                     TasksCompletionDates: []))
-                .For(numberOfTasks: 1, new InSameOrder())
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today)
                 .Should().BeEmpty();
         }
 
@@ -34,7 +37,10 @@ namespace MonteCsharpSimulation.Tests
                     From: yesterday,
                     To: yesterday,
                     TasksCompletionDates: [yesterday]))
-                .For(numberOfTasks: 1, new InSameOrder())
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
                     new Completion(When: today, Occurrences: 1)
@@ -51,7 +57,8 @@ namespace MonteCsharpSimulation.Tests
                     TasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
-                    throughputSelectionStrategy: new InSameOrder())
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
                     new Completion(When: today, Occurrences: 1)
@@ -64,7 +71,8 @@ namespace MonteCsharpSimulation.Tests
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
-                    throughputSelectionStrategy: new InSameOrder())
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
                     new Completion(When: tomorrow, Occurrences: 1)

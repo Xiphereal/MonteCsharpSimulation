@@ -19,7 +19,8 @@ namespace MonteCsharpSimulation
 
         public IReadOnlyList<Completion> For(
             int numberOfTasks,
-            InSameOrder throughputSelectionStrategy)
+            InSameOrder throughputSelectionStrategy,
+            DateTime dayToStartForecastingFrom)
         {
             if (this.period.IsEmpty)
                 return [];
