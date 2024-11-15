@@ -12,7 +12,7 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void ThroughputForSingleDate()
         {
-            Historic
+            Period
                 .ThroughputPerDay(
                     new Period(
                         From: today,
@@ -23,7 +23,7 @@ namespace MonteCsharpSimulation.Tests
                     new ThroughputPerDay(Date: today, Throughput: 1)
                 ]);
 
-            Historic
+            Period
                .ThroughputPerDay(new Period(
                     From: today,
                     To: today,
@@ -37,7 +37,7 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void ThroughputForSeveralDifferentDates()
         {
-            Historic
+            Period
                 .ThroughputPerDay(
                     new Period(
                         From: yesterday,
@@ -53,7 +53,7 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void ThroughputForDate_IsItsNumberOfOcurrences()
         {
-            Historic
+            Period
                 .ThroughputPerDay(
                     new Period(
                         From: today,
@@ -68,7 +68,7 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void DatesWithDifferentThroughput()
         {
-            Historic
+            Period
                 .ThroughputPerDay(
                     new Period(
                         From: yesterday,
@@ -89,7 +89,7 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void DatesAreSortedAscendantly()
         {
-            Historic
+            Period
                 .ThroughputPerDay(
                     new Period(
                         From: yesterday,
@@ -105,7 +105,7 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void DaysWhereNoTaskHasBeenCompleted_AreTakenIntoAccount()
         {
-            Historic
+            Period
                 .ThroughputPerDay(
                     new Period(
                         From: yesterday,

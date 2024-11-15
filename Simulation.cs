@@ -11,7 +11,7 @@ namespace MonteCsharpSimulation
         private Simulation(Period period)
         {
             this.throughputPerDays =
-                Historic.ThroughputPerDay(period);
+                Period.ThroughputPerDay(period);
             this.period = period;
         }
 
