@@ -48,8 +48,23 @@ namespace MonteCsharpSimulation.Tests
                 .From(new Period(
                     From: yesterday,
                     To: today,
+                    TasksCompletionDates: [yesterday]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder())
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(When: today, Occurrences: 1)
+                ]);
+
+            Simulation
+                .From(new Period(
+                    From: yesterday,
+                    To: today,
                     TasksCompletionDates: [today]))
-                .For(numberOfTasks: 1, throughputSelectionStrategy: new InSameOrder())
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder())
                 .Should().BeEquivalentTo(
                 [
                     new Completion(When: tomorrow, Occurrences: 1)
