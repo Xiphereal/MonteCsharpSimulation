@@ -25,6 +25,11 @@ namespace MonteCsharpSimulation
 
         public bool IsEmpty => !TasksCompletionDates.Any();
 
+        public IEnumerable<ThroughputPerDay> ThroughputPerDay()
+        {
+            return ThroughputPerDay(this);
+        }
+
         public static IEnumerable<ThroughputPerDay> ThroughputPerDay(Period period)
         {
             return

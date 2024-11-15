@@ -6,12 +6,9 @@ namespace MonteCsharpSimulation
     public class Simulation
     {
         private readonly Period period;
-        private readonly IEnumerable<ThroughputPerDay> throughputPerDays;
 
         private Simulation(Period period)
         {
-            this.throughputPerDays =
-                Period.ThroughputPerDay(period);
             this.period = period;
         }
 
@@ -28,7 +25,7 @@ namespace MonteCsharpSimulation
                 return [];
 
             Queue<int> simulatedThroughtput = strategy.SimulateThroughtput(
-                this.throughputPerDays.Select(x => x.Throughput));
+                this.period.ThroughputPerDay().Select(x => x.Throughput));
 
             int forecastedCompletionDays = 0;
             int forecastedCompletedTasks = numberOfTasks;
