@@ -19,13 +19,14 @@ namespace MonteCsharpSimulation
 
         public IReadOnlyList<Completion> For(
             int numberOfTasks,
-            InSameOrder strategy)
+            InSameOrder throughputSelectionStrategy)
         {
             if (this.period.IsEmpty)
                 return [];
 
-            Queue<int> simulatedThroughtput = strategy.SimulateThroughtput(
-                this.period.ThroughputPerDay().Select(x => x.Throughput));
+            Queue<int> simulatedThroughtput = throughputSelectionStrategy
+                .SimulateThroughtput(
+                    this.period.ThroughputPerDay().Select(x => x.Throughput));
 
             int forecastedCompletionDays = 0;
             int forecastedCompletedTasks = numberOfTasks;
