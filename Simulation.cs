@@ -37,18 +37,11 @@ namespace MonteCsharpSimulation
                 forecastedCompletionDays++;
             }
 
-            if (forecastedCompletionDays == 2)
-                return
-                   [
-                       new Completion(
-                            When: new DateTime(year: 2014, month: 2, day: 2),
-                            Occurrences: 1)
-                   ];
-
             return
             [
                 new Completion(
-                    When: new DateTime(year: 2014, month: 2, day: 1),
+                    When: new DateTime(year: 2014, month: 2, day: 1)
+                        .AddDays(forecastedCompletionDays - 1),
                     Occurrences: 1)
             ];
         }
