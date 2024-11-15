@@ -138,17 +138,17 @@ namespace MonteCsharpSimulation.Tests
         {
             Simulation
                 .From(new Period(
-                    From: today,
+                    From: yesterday,
                     To: today,
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
-                    throughputSelectionStrategy: new InSameOrder(),
+                    throughputSelectionStrategy: new SeededRandom(seed: 1),
                     dayToStartForecastingFrom: today,
                     runs: 10)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: today, Occurrences: 10)
+                    new Completion(When: today.AddDays(3), Occurrences: 10)
                 ]);
         }
     }
