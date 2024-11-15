@@ -19,7 +19,7 @@ namespace MonteCsharpSimulation
 
         public IReadOnlyList<Completion> For(
             int numberOfTasks,
-            InSameOrder throughputSelectionStrategy,
+            IThroughputSelectionStrategy throughputSelectionStrategy,
             DateTime dayToStartForecastingFrom,
             int runs = 1)
         {

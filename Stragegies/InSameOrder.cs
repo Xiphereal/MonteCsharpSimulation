@@ -1,7 +1,7 @@
 ﻿
 namespace MonteCsharpSimulation.Stragegies
 {
-    public class InSameOrder
+    public class InSameOrder : IThroughputSelectionStrategy
     {
         private Period period;
         private Queue<int> simulatedThroughtput = new();
