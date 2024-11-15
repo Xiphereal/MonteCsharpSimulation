@@ -132,5 +132,24 @@ namespace MonteCsharpSimulation.Tests
                     new Completion(When: tomorrow, Occurrences: 1)
                 ]);
         }
+
+        [Test]
+        public void asdfasdf()
+        {
+            Simulation
+                .From(new Period(
+                    From: today,
+                    To: today,
+                    TasksCompletionDates: [today]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today,
+                    runs: 10)
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(When: today, Occurrences: 10)
+                ]);
+        }
     }
 }

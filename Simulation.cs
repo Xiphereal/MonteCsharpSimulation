@@ -20,7 +20,8 @@ namespace MonteCsharpSimulation
         public IReadOnlyList<Completion> For(
             int numberOfTasks,
             InSameOrder throughputSelectionStrategy,
-            DateTime dayToStartForecastingFrom)
+            DateTime dayToStartForecastingFrom,
+            int runs = 1)
         {
             if (this.period.IsEmpty)
                 return [];
@@ -42,7 +43,7 @@ namespace MonteCsharpSimulation
                 new Completion(
                     When: dayToStartForecastingFrom
                         .AddDays(forecastedCompletionDays - 1),
-                    Occurrences: 1)
+                    Occurrences: runs)
             ];
         }
     }
