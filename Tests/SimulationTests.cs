@@ -78,5 +78,23 @@ namespace MonteCsharpSimulation.Tests
                     new Completion(When: tomorrow, Occurrences: 1)
                 ]);
         }
+
+        [Test]
+        public void ForecastCanStartInAnyDate()
+        {
+            Simulation
+                .From(new Period(
+                    From: yesterday,
+                    To: today,
+                    TasksCompletionDates: [yesterday]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today.AddDays(40))
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(When: today.AddDays(40), Occurrences: 1)
+                ]);
+        }
     }
 }
