@@ -22,5 +22,7 @@ namespace MonteCsharpSimulation
         public DateTime From { get; }
         public DateTime To { get; }
         public IEnumerable<DateTime> TasksCompletionDates { get; }
+
+        public bool IsEmpty => !TasksCompletionDates.Any();
     }
 }

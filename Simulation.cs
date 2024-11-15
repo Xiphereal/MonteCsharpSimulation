@@ -24,7 +24,7 @@ namespace MonteCsharpSimulation
             int numberOfTasks,
             InSameOrder strategy)
         {
-            if (!this.period.TasksCompletionDates.Any())
+            if (this.period.IsEmpty)
                 return [];
 
             Queue<int> simulatedThroughtput = strategy.SimulateThroughtput(
