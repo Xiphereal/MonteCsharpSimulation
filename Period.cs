@@ -27,24 +27,18 @@ namespace MonteCsharpSimulation
 
         public IEnumerable<ThroughputPerDay> ThroughputPerDay()
         {
-            return ThroughputPerDay(this);
-        }
-
-        public static IEnumerable<ThroughputPerDay> ThroughputPerDay(Period period)
-        {
             return
-                ThroughputPerDayFor(period.TasksCompletionDates)
-                    .Union(ZeroThroughputPerDayFor(
-                        DatesWithNoCompletedTask(period)))
+                ThroughputPerDayForDatesWithAnyCompletedTask()
+                    .Union(ZeroThroughputPerDayFor(DatesWithNoCompletedTask()))
                     .OrderBy(x => x.Date);
         }
 
-        private static IEnumerable<DateTime> DatesWithNoCompletedTask(Period period)
+        private IEnumerable<DateTime> DatesWithNoCompletedTask()
         {
             IEnumerable<DateTime> allDates =
-                EnumerateAllInBetween(period.From, period.To);
+                EnumerateAllInBetween(From, To);
 
-            return allDates.Except(period.TasksCompletionDates);
+            return allDates.Except(TasksCompletionDates);
         }
 
         private static IEnumerable<ThroughputPerDay> ZeroThroughputPerDayFor(
@@ -57,10 +51,9 @@ namespace MonteCsharpSimulation
                     Throughput: 0));
         }
 
-        private static IEnumerable<ThroughputPerDay> ThroughputPerDayFor(
-            IEnumerable<DateTime> dates)
+        private IEnumerable<ThroughputPerDay> ThroughputPerDayForDatesWithAnyCompletedTask()
         {
-            return dates
+            return TasksCompletionDates
                 .GroupBy(x => x.Date)
                 .Select(x => new ThroughputPerDay(
                     Date: x.Key,

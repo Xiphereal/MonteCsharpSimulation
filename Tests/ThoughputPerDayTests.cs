@@ -12,22 +12,21 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void ThroughputForSingleDate()
         {
-            Period
-                .ThroughputPerDay(
-                    new Period(
-                        From: today,
-                        To: today,
-                        TasksCompletionDates: [today]))
+            new Period(
+                    From: today,
+                    To: today,
+                    TasksCompletionDates: [today])
+                .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: today, Throughput: 1)
                 ]);
 
-            Period
-               .ThroughputPerDay(new Period(
+            new Period(
                     From: today,
                     To: today,
-                    TasksCompletionDates: []))
+                    TasksCompletionDates: [])
+               .ThroughputPerDay()
                .Should().BeEquivalentTo(
                [
                    new ThroughputPerDay(Date: today, Throughput: 0)
@@ -37,12 +36,11 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void ThroughputForSeveralDifferentDates()
         {
-            Period
-                .ThroughputPerDay(
-                    new Period(
-                        From: yesterday,
-                        To: today,
-                        TasksCompletionDates: [yesterday, today]))
+            new Period(
+                    From: yesterday,
+                    To: today,
+                    TasksCompletionDates: [yesterday, today])
+                .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: yesterday, Throughput: 1),
@@ -53,12 +51,11 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void ThroughputForDate_IsItsNumberOfOcurrences()
         {
-            Period
-                .ThroughputPerDay(
-                    new Period(
-                        From: today,
-                        To: today,
-                        TasksCompletionDates: [today, today]))
+            new Period(
+                    From: today,
+                    To: today,
+                    TasksCompletionDates: [today, today])
+                .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: today, Throughput: 2),
@@ -68,17 +65,16 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void DatesWithDifferentThroughput()
         {
-            Period
-                .ThroughputPerDay(
-                    new Period(
-                        From: yesterday,
-                        To: today,
-                        TasksCompletionDates:
-                        [
-                            yesterday,
-                            yesterday,
-                            today,
-                        ]))
+            new Period(
+                    From: yesterday,
+                    To: today,
+                    TasksCompletionDates:
+                    [
+                        yesterday,
+                        yesterday,
+                        today,
+                    ])
+                .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: yesterday, Throughput: 2),
@@ -89,12 +85,11 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void DatesAreSortedAscendantly()
         {
-            Period
-                .ThroughputPerDay(
-                    new Period(
-                        From: yesterday,
-                        To: today,
-                    [today, yesterday]))
+            new Period(
+                    From: yesterday,
+                    To: today,
+                    [today, yesterday])
+                .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: yesterday, Throughput: 1),
@@ -105,12 +100,11 @@ namespace MonteCsharpSimulation.Tests
         [Test]
         public void DaysWhereNoTaskHasBeenCompleted_AreTakenIntoAccount()
         {
-            Period
-                .ThroughputPerDay(
-                    new Period(
-                        From: yesterday,
-                        To: tomorrow,
-                        TasksCompletionDates: [yesterday, tomorrow]))
+            new Period(
+                    From: yesterday,
+                    To: tomorrow,
+                    TasksCompletionDates: [yesterday, tomorrow])
+                .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: yesterday, Throughput: 1),
