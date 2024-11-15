@@ -84,9 +84,9 @@ namespace MonteCsharpSimulation.Tests
         {
             Simulation
                 .From(new Period(
-                    From: yesterday,
+                    From: today,
                     To: today,
-                    TasksCompletionDates: [yesterday]))
+                    TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
