@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\MonteCsharpSimulation.csproj" />
+		<ProjectReference Include="..\Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

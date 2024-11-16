@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace MonteCsharpSimulation
+namespace Domain
 {
     internal class Forecast : IReadOnlyList<Completion>
     {
@@ -30,7 +30,7 @@ namespace MonteCsharpSimulation
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

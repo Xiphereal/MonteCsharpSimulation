@@ -1,4 +1,4 @@
-﻿namespace MonteCsharpSimulation
+﻿namespace Domain
 {
     public class Completion
     {
@@ -7,8 +7,8 @@
 
         public Completion(DateTime when, int occurrences)
         {
-            this.When = when;
-            this.Occurrences = occurrences;
+            When = when;
+            Occurrences = occurrences;
         }
 
         public override bool Equals(object? obj)

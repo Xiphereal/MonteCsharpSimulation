@@ -1,5 +1,4 @@
-﻿
-namespace MonteCsharpSimulation
+﻿namespace Domain
 {
     public record Period
     {

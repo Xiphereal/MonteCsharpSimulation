@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+﻿using Domain.Stragegies;
+using FluentAssertions;
 using FluentAssertions.Extensions;
-using MonteCsharpSimulation.Stragegies;
 
-namespace MonteCsharpSimulation.Tests
+namespace Domain.Tests
 {
     public class SimulationTests
     {

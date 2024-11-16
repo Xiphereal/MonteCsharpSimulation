@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Extensions;
 
-namespace MonteCsharpSimulation.Tests
+namespace Domain.Tests
 {
     public class ThoughputPerDayTests
     {

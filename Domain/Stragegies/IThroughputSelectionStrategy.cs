@@ -1,4 +1,6 @@
-﻿namespace MonteCsharpSimulation.Stragegies
+﻿using Domain;
+
+namespace Domain.Stragegies
 {
     public interface IThroughputSelectionStrategy
     {

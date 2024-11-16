@@ -1,7 +1,6 @@
-﻿
-using MonteCsharpSimulation.Stragegies;
+﻿using Domain.Stragegies;
 
-namespace MonteCsharpSimulation
+namespace Domain
 {
     public class Simulation
     {
