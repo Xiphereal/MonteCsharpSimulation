@@ -1,1 +1,4 @@
 - refactor: forecasted this, forecasted that...
+- test(property): total # of occurrences == # runs
+- test: what about the Time in DateTime?
+- refactor: remove unused random seeded  strategy

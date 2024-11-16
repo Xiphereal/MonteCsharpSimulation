@@ -38,9 +38,9 @@ namespace MonteCsharpSimulation
                         throughputSelectionStrategy);
 
                 forecast.Add(new Completion(
-                    When: dayToStartForecastingFrom
+                    when: dayToStartForecastingFrom
                         .AddDays(forecastedCompletionDays - 1),
-                    Occurrences: 1));
+                    occurrences: 1));
             }
 
             return forecast;

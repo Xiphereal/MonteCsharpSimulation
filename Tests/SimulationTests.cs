@@ -39,7 +39,7 @@ namespace MonteCsharpSimulation.Tests
                     dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: today, Occurrences: 1)
+                    new Completion(when: today, occurrences: 1)
                 ]);
         }
 
@@ -57,7 +57,7 @@ namespace MonteCsharpSimulation.Tests
                     dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: today, Occurrences: 1)
+                    new Completion(when: today, occurrences: 1)
                 ]);
 
             Simulation
@@ -71,7 +71,7 @@ namespace MonteCsharpSimulation.Tests
                     dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: tomorrow, Occurrences: 1)
+                    new Completion(when: tomorrow, occurrences: 1)
                 ]);
         }
 
@@ -89,7 +89,7 @@ namespace MonteCsharpSimulation.Tests
                     dayToStartForecastingFrom: today.AddDays(40))
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: today.AddDays(40), Occurrences: 1)
+                    new Completion(when: today.AddDays(40), occurrences: 1)
                 ]);
         }
 
@@ -107,7 +107,7 @@ namespace MonteCsharpSimulation.Tests
                     dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: tomorrow, Occurrences: 1)
+                    new Completion(when: tomorrow, occurrences: 1)
                 ]);
         }
 
@@ -125,7 +125,7 @@ namespace MonteCsharpSimulation.Tests
                     dayToStartForecastingFrom: today)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: tomorrow, Occurrences: 1)
+                    new Completion(when: tomorrow, occurrences: 1)
                 ]);
         }
 
@@ -144,7 +144,22 @@ namespace MonteCsharpSimulation.Tests
                     runs: 2)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: tomorrow, Occurrences: 2),
+                    new Completion(when: tomorrow, occurrences: 2),
+                ]);
+
+            Simulation
+                .From(new Period(
+                    From: yesterday,
+                    To: today,
+                    TasksCompletionDates: [today]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today,
+                    runs: 3)
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(when: tomorrow, occurrences: 3),
                 ]);
         }
 
@@ -163,8 +178,8 @@ namespace MonteCsharpSimulation.Tests
                     runs: 2)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: today, Occurrences: 1),
-                    new Completion(When: tomorrow, Occurrences: 1),
+                    new Completion(when: today, occurrences: 1),
+                    new Completion(when: tomorrow, occurrences: 1),
                 ]);
         }
     }
