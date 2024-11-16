@@ -10,10 +10,6 @@ namespace MonteCsharpSimulation.Tests
         private static readonly DateTime yesterday = today.Subtract(1.Days());
         private static readonly DateTime tomorrow = today.AddDays(1);
 
-        // Given the throughput per date and 1 task, a random day throughput is chosen as completion.
-        // Given the throughput per date and 2 tasks, their completion is the sum of any two random days throughput.
-        // A number of iterations can be specified. There are several possible completion dates.
-
         [Test]
         public void NoCompletedTasks_PredictsNoCompletionDate()
         {
