@@ -11,6 +11,39 @@ namespace MonteCsharpSimulation.Tests
         private static readonly DateTime tomorrow = today.AddDays(1);
 
         [Test]
+        public void Acceptance()
+        {
+            Simulation
+                .From(new Period(
+                    From: 1.January(2010),
+                    To: 14.January(2010),
+                    TasksCompletionDates:
+                    [
+                        1.January(2010),
+                        5.January(2010),
+                        5.January(2010),
+                        8.January(2010),
+                        12.January(2010),
+                        12.January(2010),
+                        12.January(2010),
+                        14.January(2010),
+                    ]))
+                .For(
+                    numberOfTasks: 8,
+                    throughputSelectionStrategy: new SeededRandom(seed: 1),
+                    dayToStartForecastingFrom: 4.March(2010),
+                    runs: 5)
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(when: 10.March(2010), occurrences: 1),
+                    new Completion(when: 11.March(2010), occurrences: 1),
+                    new Completion(when: 18.March(2010), occurrences: 1),
+                    new Completion(when: 20.March(2010), occurrences: 1),
+                    new Completion(when: 24.March(2010), occurrences: 1),
+                ]);
+        }
+
+        [Test]
         public void NoCompletedTasks_PredictsNoCompletionDate()
         {
             Simulation
