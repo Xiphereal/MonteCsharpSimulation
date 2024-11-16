@@ -134,7 +134,7 @@ namespace MonteCsharpSimulation.Tests
         }
 
         [Test]
-        public void asdfasdf()
+        public void CompletionDatesMayBeForecasted_MoreThanOnce()
         {
             Simulation
                 .From(new Period(
@@ -143,12 +143,12 @@ namespace MonteCsharpSimulation.Tests
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
-                    throughputSelectionStrategy: new SeededRandom(seed: 1),
+                    throughputSelectionStrategy: new InSameOrder(),
                     dayToStartForecastingFrom: today,
-                    runs: 10)
+                    runs: 2)
                 .Should().BeEquivalentTo(
                 [
-                    new Completion(When: today.AddDays(3), Occurrences: 10)
+                    new Completion(When: tomorrow, Occurrences: 2),
                 ]);
         }
     }
