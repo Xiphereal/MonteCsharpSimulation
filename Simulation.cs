@@ -28,7 +28,7 @@ namespace MonteCsharpSimulation
 
             throughputSelectionStrategy.SimulateFor(period);
 
-            var result = new List<Completion>();
+            var forecast = new Forecast();
 
             for (int i = 0; i < runs; i++)
             {
@@ -37,29 +37,13 @@ namespace MonteCsharpSimulation
                         numberOfTasks,
                         throughputSelectionStrategy);
 
-                Completion completion = new Completion(
+                forecast.Add(new Completion(
                     When: dayToStartForecastingFrom
                         .AddDays(forecastedCompletionDays - 1),
-                    Occurrences: 1);
-
-                AddTo(completion, result);
+                    Occurrences: 1));
             }
 
-            return result;
-        }
-
-        private static void AddTo(
-            Completion completion,
-            List<Completion> result)
-        {
-            if (result.Contains(completion))
-            {
-                result.Find(x => x == completion).Occurrences++;
-            }
-            else
-            {
-                result.Add(completion);
-            }
+            return forecast;
         }
 
         private static int ForecastCompletionDays(
