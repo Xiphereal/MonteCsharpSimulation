@@ -28,6 +28,44 @@ namespace MonteCsharpSimulation
 
             throughputSelectionStrategy.SimulateFor(period);
 
+            var result = new List<Completion>();
+
+            for (int i = 0; i < runs; i++)
+            {
+                int forecastedCompletionDays =
+                    ForecastCompletionDays(
+                        numberOfTasks,
+                        throughputSelectionStrategy);
+
+                Completion completion = new Completion(
+                    When: dayToStartForecastingFrom
+                        .AddDays(forecastedCompletionDays - 1),
+                    Occurrences: 1);
+
+                AddTo(completion, result);
+            }
+
+            return result;
+        }
+
+        private static void AddTo(
+            Completion completion,
+            List<Completion> result)
+        {
+            if (result.Contains(completion))
+            {
+                result.Find(x => x == completion).Occurrences++;
+            }
+            else
+            {
+                result.Add(completion);
+            }
+        }
+
+        private static int ForecastCompletionDays(
+            int numberOfTasks,
+            IThroughputSelectionStrategy throughputSelectionStrategy)
+        {
             int forecastedCompletionDays = 0;
             int forecastedCompletedTasks = numberOfTasks;
             while (forecastedCompletedTasks > 0)
@@ -38,13 +76,7 @@ namespace MonteCsharpSimulation
                 forecastedCompletionDays++;
             }
 
-            return
-            [
-                new Completion(
-                    When: dayToStartForecastingFrom
-                        .AddDays(forecastedCompletionDays - 1),
-                    Occurrences: runs)
-            ];
+            return forecastedCompletionDays;
         }
     }
 }

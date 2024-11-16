@@ -151,5 +151,25 @@ namespace MonteCsharpSimulation.Tests
                     new Completion(When: tomorrow, Occurrences: 2),
                 ]);
         }
+
+        [Test]
+        public void ForecastMayHaveDifferentCompletionDates()
+        {
+            Simulation
+                .From(new Period(
+                    From: yesterday,
+                    To: today,
+                    TasksCompletionDates: [yesterday]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today,
+                    runs: 2)
+                .Should().BeEquivalentTo(
+                [
+                    new Completion(When: today, Occurrences: 1),
+                    new Completion(When: tomorrow, Occurrences: 1),
+                ]);
+        }
     }
 }
