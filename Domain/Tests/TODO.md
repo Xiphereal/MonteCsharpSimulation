@@ -3,6 +3,6 @@
 - test: throughput strategy selection theory "ForecastTakesLongerThanPeriod_ThroughputIsNotExhausted"
 - chore: review if license still applies
 - feat: validate source CSV meets preconditions. What happens if the DateTime culture is different? Or its format?
-- feat: what if there is any issue writing to the disk? Permissions, free space, etc.
-- feat: what if the result file already exist?
+- feat: what if there is any issue reading/writing to the disk? Permissions, free space, etc.
 - feat: order Simulation Completions by date 
+- test: a bunch of tasks cannot be completed on single day if there isn't a day with, at least, that throughput
