@@ -8,12 +8,12 @@ namespace Domain.Stragegies
         private Period period;
         private Queue<int> simulatedThroughtput = new();
 
-        public void SimulateFor(Period period)
+        private void SimulateFor(Period period)
         {
             this.period = period;
         }
 
-        public int NextValue()
+        private int NextValue()
         {
             if (!simulatedThroughtput.Any())
                 SimulateThroughput();

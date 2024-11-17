@@ -25,8 +25,6 @@ namespace Domain
             if (this.period.IsEmpty)
                 return [];
 
-            throughputSelectionStrategy.SimulateFor(period);
-
             var forecast = new Forecast();
 
             for (int i = 0; i < runs; i++)
