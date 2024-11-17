@@ -22,9 +22,7 @@
             this.tasksCompletionDates = tasksCompletionDates;
         }
 
-        private IEnumerable<DateTime> TasksCompletionDates => tasksCompletionDates;
-
-        public bool IsEmpty => !TasksCompletionDates.Any();
+        public bool IsEmpty => !tasksCompletionDates.Any();
 
         public IEnumerable<ThroughputPerDay> ThroughputPerDay()
         {
@@ -38,7 +36,7 @@
         {
             IEnumerable<DateTime> allDates = EnumerateAllInBetween(from, to);
 
-            return allDates.Except(TasksCompletionDates);
+            return allDates.Except(tasksCompletionDates);
         }
 
         private static IEnumerable<ThroughputPerDay> ZeroThroughputPerDayFor(
@@ -53,7 +51,7 @@
 
         private IEnumerable<ThroughputPerDay> ThroughputPerDayForDatesWithAnyCompletedTask()
         {
-            return TasksCompletionDates
+            return tasksCompletionDates
                 .GroupBy(x => x.Date)
                 .Select(x => new ThroughputPerDay(
                     Date: x.Key,
