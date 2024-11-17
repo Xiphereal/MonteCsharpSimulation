@@ -36,6 +36,9 @@ namespace SpreadsheetsIntegration
             string toSpreadsheetPath,
             IEnumerable<TaskRecord> tasks)
         {
+            if (File.Exists(toSpreadsheetPath))
+                File.Delete(toSpreadsheetPath);
+            
             using var writer = new StreamWriter(toSpreadsheetPath);
             using var result = new CsvWriter(writer, CultureInfo.InvariantCulture);
             result.Context.RegisterClassMap<TaskRecordMap>();

@@ -31,6 +31,19 @@ namespace SpreadsheetsIntegration.Tests
         }
 
         [Test]
+        public void DeletesPreviousResult()
+        {
+            File.Create(PathOfResultCsv).Dispose();
+            File.Exists(PathOfResultCsv).Should().BeTrue();
+
+            MonteCarloSimulation
+                .Simulate(
+                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                    toSpreadsheetPath: PathOfResultCsv);
+            File.Exists(PathOfResultCsv).Should().BeTrue();
+        }
+
+        [Test]
         public void ResultContainsSomething()
         {
             MonteCarloSimulation
