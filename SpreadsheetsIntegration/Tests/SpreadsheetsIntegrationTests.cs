@@ -10,10 +10,9 @@ namespace SpreadsheetsIntegration.Tests
         [Test]
         public void CreatesResultInCsv()
         {
-            MonteCarloSimulation
-                .Simulate(
-                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
-                    toSpreadsheetPath: PathOfResultCsv);
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv);
 
             File.Exists(PathOfResultCsv).Should().BeTrue();
         }
@@ -21,22 +20,20 @@ namespace SpreadsheetsIntegration.Tests
         [Test]
         public void ResultContainsSomething()
         {
-            MonteCarloSimulation
-                .Simulate(
-                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
-                    toSpreadsheetPath: PathOfResultCsv);
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet, 
+                toSpreadsheetPath: PathOfResultCsv);
 
-            File.ReadAllText(PathOfResultCsv).Should().NotBeEmpty();
+            File.ReadAllLines(PathOfResultCsv).Should().HaveCount(3);
         }
 
         [Test]
         public void ThrowsIfNoSourceIsFound()
         {
             var sutInvocation = () =>
-                MonteCarloSimulation
-                    .Simulate(
-                        fromSpreadsheetPath: "Path/WhereThereIsNo/Spreadsheet",
-                        toSpreadsheetPath: PathOfResultCsv);
+                MonteCarloSimulation(
+                    fromSpreadsheetPath: "Path/WhereThereIsNo/Spreadsheet",
+                    toSpreadsheetPath: PathOfResultCsv);
 
             sutInvocation.Should().Throw<FileNotFoundException>();
         }
@@ -47,10 +44,9 @@ namespace SpreadsheetsIntegration.Tests
             File.Create(PathOfResultCsv).Dispose();
             File.Exists(PathOfResultCsv).Should().BeTrue();
 
-            MonteCarloSimulation
-                .Simulate(
-                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
-                    toSpreadsheetPath: PathOfResultCsv);
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv);
             File.Exists(PathOfResultCsv).Should().BeTrue();
         }
 
@@ -59,6 +55,16 @@ namespace SpreadsheetsIntegration.Tests
         {
             if (File.Exists(PathOfResultCsv))
                 File.Delete(PathOfResultCsv);
+        }
+
+        private static void MonteCarloSimulation(
+            string fromSpreadsheetPath,
+            string toSpreadsheetPath)
+        {
+            SpreadsheetsIntegration.MonteCarloSimulation
+                .Simulate(
+                    fromSpreadsheetPath: fromSpreadsheetPath,
+                    toSpreadsheetPath: toSpreadsheetPath);
         }
     }
 }
