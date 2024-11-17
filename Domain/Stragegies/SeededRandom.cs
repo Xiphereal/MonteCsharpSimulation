@@ -30,7 +30,7 @@ namespace Domain.Stragegies
 
         public int NextValueNew(Period period)
         {
-            SimulateFor(period);
+            this.period = period;
             return NextValue();
         }
     }

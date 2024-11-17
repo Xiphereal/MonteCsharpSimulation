@@ -1,36 +1,22 @@
 ﻿
-using Domain;
-
 namespace Domain.Stragegies
 {
     public class InSameOrder : IThroughputSelectionStrategy
     {
-        private Period period;
         private Queue<int> simulatedThroughtput = new();
 
-        private void SimulateFor(Period period)
-        {
-            this.period = period;
-        }
-
-        private int NextValue()
+        public int NextValueNew(Period period)
         {
             if (!simulatedThroughtput.Any())
-                SimulateThroughput();
+                SimulateThroughput(period);
 
             return simulatedThroughtput.Dequeue();
         }
 
-        private void SimulateThroughput()
+        private void SimulateThroughput(Period period1)
         {
             simulatedThroughtput = new Queue<int>(
-                period.ThroughputPerDay().Select(x => x.Throughput));
-        }
-
-        public int NextValueNew(Period period)
-        {
-            SimulateFor(period);
-            return NextValue();
+                period1.ThroughputPerDay().Select(x => x.Throughput));
         }
     }
 }
