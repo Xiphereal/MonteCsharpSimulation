@@ -17,7 +17,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: 1.January(2010),
                     to: 14.January(2010),
-                    TasksCompletionDates:
+                    tasksCompletionDates:
                     [
                         1.January(2010),
                         5.January(2010),
@@ -50,7 +50,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: today,
                     to: today,
-                    TasksCompletionDates: []))
+                    tasksCompletionDates: []))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -65,7 +65,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: yesterday,
-                    TasksCompletionDates: [yesterday]))
+                    tasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -83,7 +83,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [yesterday]))
+                    tasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -97,7 +97,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [today]))
+                    tasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -115,7 +115,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: today,
                     to: today,
-                    TasksCompletionDates: [today]))
+                    tasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -133,7 +133,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [yesterday, today]))
+                    tasksCompletionDates: [yesterday, today]))
                 .For(
                     numberOfTasks: 2,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -151,7 +151,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: today,
                     to: today,
-                    TasksCompletionDates: [today]))
+                    tasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 2,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -169,7 +169,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [today]))
+                    tasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -184,7 +184,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [today]))
+                    tasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -203,7 +203,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [yesterday]))
+                    tasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -226,7 +226,7 @@ namespace Domain.Tests
                 .From(new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [yesterday, today]))
+                    tasksCompletionDates: [yesterday, today]))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),

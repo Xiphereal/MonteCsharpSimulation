@@ -9,17 +9,17 @@
         public Period(
             DateTime from,
             DateTime to,
-            IEnumerable<DateTime> TasksCompletionDates)
+            IEnumerable<DateTime> tasksCompletionDates)
         {
             if (from > to)
                 throw new ArgumentException();
 
-            if (TasksCompletionDates.Any(x => x.Date < from || x.Date > to))
+            if (tasksCompletionDates.Any(x => x.Date < from || x.Date > to))
                 throw new ArgumentException();
 
             this.from = from;
             this.to = to;
-            this.tasksCompletionDates = TasksCompletionDates;
+            this.tasksCompletionDates = tasksCompletionDates;
         }
 
         private IEnumerable<DateTime> TasksCompletionDates => tasksCompletionDates;

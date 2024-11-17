@@ -15,7 +15,7 @@ namespace Domain.Tests
             new Period(
                     from: today,
                     to: today,
-                    TasksCompletionDates: [today])
+                    tasksCompletionDates: [today])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
@@ -25,7 +25,7 @@ namespace Domain.Tests
             new Period(
                     from: today,
                     to: today,
-                    TasksCompletionDates: [])
+                    tasksCompletionDates: [])
                .ThroughputPerDay()
                .Should().BeEquivalentTo(
                [
@@ -39,7 +39,7 @@ namespace Domain.Tests
             new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates: [yesterday, today])
+                    tasksCompletionDates: [yesterday, today])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
@@ -54,7 +54,7 @@ namespace Domain.Tests
             new Period(
                     from: today,
                     to: today,
-                    TasksCompletionDates: [today, today])
+                    tasksCompletionDates: [today, today])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
@@ -68,7 +68,7 @@ namespace Domain.Tests
             new Period(
                     from: yesterday,
                     to: today,
-                    TasksCompletionDates:
+                    tasksCompletionDates:
                     [
                         yesterday,
                         yesterday,
@@ -103,7 +103,7 @@ namespace Domain.Tests
             new Period(
                     from: yesterday,
                     to: tomorrow,
-                    TasksCompletionDates: [yesterday, tomorrow])
+                    tasksCompletionDates: [yesterday, tomorrow])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
                 [
