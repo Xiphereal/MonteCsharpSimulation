@@ -36,9 +36,6 @@ namespace SpreadsheetsIntegration
             string toSpreadsheetPath,
             IEnumerable<TaskRecord> tasks)
         {
-            var disposedAtExitingScope = File.Create(toSpreadsheetPath);
-            disposedAtExitingScope.Dispose();
-
             using var writer = new StreamWriter(toSpreadsheetPath);
             using var result = new CsvWriter(
                 writer,
