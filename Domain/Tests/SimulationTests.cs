@@ -215,5 +215,23 @@ namespace Domain.Tests
                     new Completion(when: tomorrow, occurrences: 1),
                 ]);
         }
+
+        [Test]
+        [Repeat(100)]
+        public void AlwaysGenerateOneCompletionPerRun()
+        {
+            var runs = new Random().Next(1, 10000);
+
+            Simulation.From(new Period(
+                    From: yesterday,
+                    To: today,
+                    TasksCompletionDates: [yesterday, today]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: today,
+                    runs: runs
+                ).Sum(x => x.Occurrences).Should().Be(runs);
+        }
     }
 }
