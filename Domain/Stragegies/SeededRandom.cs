@@ -12,11 +12,6 @@ namespace Domain.Stragegies
             this.random = new Random(Seed: seed);
         }
 
-        private void SimulateFor(Period period)
-        {
-            this.period = period;
-        }
-
         private int NextValue()
         {
             List<int> throughputPerDays = this.period
