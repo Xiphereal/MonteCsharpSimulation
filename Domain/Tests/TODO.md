@@ -1,7 +1,8 @@
 - refactor: forecasted this, forecasted that...
 - test(property): total # of occurrences == # runs
 - test: what about the Time in DateTime?
-- refactor: remove unused random seeded  strategy
 - test: throughput strategy selection theory "ForecastTakesLongerThanPeriod_ThroughputIsNotExhausted"
 - chore: review if license still applies
 - feat: validate source CSV meets preconditions. What happens if the DateTime culture is different? Or its format?
+- feat: what if there is any issue writing to the disk? Permissions, free space, etc.
+- feat: what if the result file already exist?
