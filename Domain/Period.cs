@@ -32,12 +32,8 @@
                     .OrderBy(x => x.Date);
         }
 
-        private IEnumerable<DateTime> DatesWithNoCompletedTask()
-        {
-            IEnumerable<DateTime> allDates = EnumerateAllInBetween(from, to);
-
-            return allDates.Except(tasksCompletionDates);
-        }
+        private IEnumerable<DateTime> DatesWithNoCompletedTask() => 
+            EnumerateAllInBetween(from, to).Except(tasksCompletionDates);
 
         private static IEnumerable<ThroughputPerDay> ZeroThroughputPerDayFor(
             IEnumerable<DateTime> dates)
