@@ -37,12 +37,7 @@ namespace SpreadsheetsIntegration
             IEnumerable<TaskRecord> tasks)
         {
             using var writer = new StreamWriter(toSpreadsheetPath);
-            using var result = new CsvWriter(
-                writer,
-                new CsvConfiguration(CultureInfo.CurrentCulture)
-                {
-                    HeaderValidated = null,
-                });
+            using var result = new CsvWriter(writer, CultureInfo.CurrentCulture);
             result.Context.RegisterClassMap<TaskRecordMap>();
 
             result.WriteRecords(tasks);
