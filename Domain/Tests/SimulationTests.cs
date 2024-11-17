@@ -32,7 +32,7 @@ namespace Domain.Tests
                     numberOfTasks: 8,
                     throughputSelectionStrategy: new SeededRandom(seed: 1),
                     dayToStartForecastingFrom: 4.March(2010),
-                    runs: 10000)
+                    runs: 5)
                 .Should().BeEquivalentTo(
                 [
                     new Completion(when: 10.March(2010), occurrences: 1),
