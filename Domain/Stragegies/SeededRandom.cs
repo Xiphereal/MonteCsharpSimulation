@@ -28,7 +28,7 @@ namespace Domain.Stragegies
                 .ElementAt(this.random.Next(0, throughputPerDays.Count));
         }
 
-        public int NextValueNew(Period period)
+        public int NextValue(Period period)
         {
             this.period = period;
             return NextValue();

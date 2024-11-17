@@ -2,6 +2,6 @@
 {
     public interface IThroughputSelectionStrategy
     {
-        int NextValueNew(Period period);
+        int NextValue(Period period);
     }
 }

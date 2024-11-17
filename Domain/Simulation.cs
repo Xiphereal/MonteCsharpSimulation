@@ -52,7 +52,7 @@ namespace Domain
             while (forecastedCompletedTasks > 0)
             {
                 forecastedCompletedTasks -=
-                    throughputSelectionStrategy.NextValueNew(this.period);
+                    throughputSelectionStrategy.NextValue(this.period);
 
                 forecastedCompletionDays++;
             }

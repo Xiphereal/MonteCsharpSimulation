@@ -5,7 +5,7 @@ namespace Domain.Stragegies
     {
         private Queue<int> simulatedThroughtput = new();
 
-        public int NextValueNew(Period period)
+        public int NextValue(Period period)
         {
             if (!simulatedThroughtput.Any())
                 SimulateThroughput(period);
@@ -13,10 +13,10 @@ namespace Domain.Stragegies
             return simulatedThroughtput.Dequeue();
         }
 
-        private void SimulateThroughput(Period period1)
+        private void SimulateThroughput(Period period)
         {
             simulatedThroughtput = new Queue<int>(
-                period1.ThroughputPerDay().Select(x => x.Throughput));
+                period.ThroughputPerDay().Select(x => x.Throughput));
         }
     }
 }
