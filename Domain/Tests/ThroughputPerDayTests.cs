@@ -13,8 +13,8 @@ namespace Domain.Tests
         public void ThroughputForSingleDate()
         {
             new Period(
-                    From: today,
-                    To: today,
+                    from: today,
+                    to: today,
                     TasksCompletionDates: [today])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
@@ -23,8 +23,8 @@ namespace Domain.Tests
                 ]);
 
             new Period(
-                    From: today,
-                    To: today,
+                    from: today,
+                    to: today,
                     TasksCompletionDates: [])
                .ThroughputPerDay()
                .Should().BeEquivalentTo(
@@ -37,8 +37,8 @@ namespace Domain.Tests
         public void ThroughputForSeveralDifferentDates()
         {
             new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [yesterday, today])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
@@ -52,8 +52,8 @@ namespace Domain.Tests
         public void ThroughputForDate_IsItsNumberOfOccurrences()
         {
             new Period(
-                    From: today,
-                    To: today,
+                    from: today,
+                    to: today,
                     TasksCompletionDates: [today, today])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
@@ -66,8 +66,8 @@ namespace Domain.Tests
         public void DatesWithDifferentThroughput()
         {
             new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates:
                     [
                         yesterday,
@@ -86,8 +86,8 @@ namespace Domain.Tests
         public void DatesAreSortedAscending()
         {
             new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     [today, yesterday])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
@@ -101,8 +101,8 @@ namespace Domain.Tests
         public void DaysWhereNoTaskHasBeenCompleted_AreTakenIntoAccount()
         {
             new Period(
-                    From: yesterday,
-                    To: tomorrow,
+                    from: yesterday,
+                    to: tomorrow,
                     TasksCompletionDates: [yesterday, tomorrow])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(

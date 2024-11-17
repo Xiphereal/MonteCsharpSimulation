@@ -15,8 +15,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: 1.January(2010),
-                    To: 14.January(2010),
+                    from: 1.January(2010),
+                    to: 14.January(2010),
                     TasksCompletionDates:
                     [
                         1.January(2010),
@@ -48,8 +48,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: today,
-                    To: today,
+                    from: today,
+                    to: today,
                     TasksCompletionDates: []))
                 .For(
                     numberOfTasks: 1,
@@ -63,8 +63,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: yesterday,
+                    from: yesterday,
+                    to: yesterday,
                     TasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
@@ -81,8 +81,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
@@ -95,8 +95,8 @@ namespace Domain.Tests
 
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
@@ -113,8 +113,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: today,
-                    To: today,
+                    from: today,
+                    to: today,
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
@@ -131,8 +131,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [yesterday, today]))
                 .For(
                     numberOfTasks: 2,
@@ -149,8 +149,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: today,
-                    To: today,
+                    from: today,
+                    to: today,
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 2,
@@ -167,8 +167,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
@@ -182,8 +182,8 @@ namespace Domain.Tests
 
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [today]))
                 .For(
                     numberOfTasks: 1,
@@ -201,8 +201,8 @@ namespace Domain.Tests
         {
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [yesterday]))
                 .For(
                     numberOfTasks: 1,
@@ -224,8 +224,8 @@ namespace Domain.Tests
 
             Simulation
                 .From(new Period(
-                    From: yesterday,
-                    To: today,
+                    from: yesterday,
+                    to: today,
                     TasksCompletionDates: [yesterday, today]))
                 .For(
                     numberOfTasks: 1,

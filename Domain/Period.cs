@@ -2,25 +2,27 @@
 {
     public record Period
     {
+        private readonly DateTime to;
+        private readonly DateTime from;
+        private readonly IEnumerable<DateTime> tasksCompletionDates;
+
         public Period(
-            DateTime From,
-            DateTime To,
+            DateTime from,
+            DateTime to,
             IEnumerable<DateTime> TasksCompletionDates)
         {
-            if (From > To)
+            if (from > to)
                 throw new ArgumentException();
 
-            if (TasksCompletionDates.Any(x => x.Date < From || x.Date > To))
+            if (TasksCompletionDates.Any(x => x.Date < from || x.Date > to))
                 throw new ArgumentException();
 
-            this.From = From;
-            this.To = To;
-            this.TasksCompletionDates = TasksCompletionDates;
+            this.from = from;
+            this.to = to;
+            this.tasksCompletionDates = TasksCompletionDates;
         }
 
-        public DateTime From { get; }
-        public DateTime To { get; }
-        public IEnumerable<DateTime> TasksCompletionDates { get; }
+        private IEnumerable<DateTime> TasksCompletionDates => tasksCompletionDates;
 
         public bool IsEmpty => !TasksCompletionDates.Any();
 
@@ -34,8 +36,7 @@
 
         private IEnumerable<DateTime> DatesWithNoCompletedTask()
         {
-            IEnumerable<DateTime> allDates =
-                EnumerateAllInBetween(From, To);
+            IEnumerable<DateTime> allDates = EnumerateAllInBetween(from, to);
 
             return allDates.Except(TasksCompletionDates);
         }
