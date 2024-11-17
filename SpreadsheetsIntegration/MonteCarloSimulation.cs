@@ -23,7 +23,7 @@ namespace SpreadsheetsIntegration
             using var reader = new StreamReader(fromSpreadsheetPath);
             using var csv = new CsvReader(
                 reader,
-                new CsvConfiguration(CultureInfo.CurrentCulture)
+                new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
                     Delimiter = ",",
                 });
@@ -37,7 +37,7 @@ namespace SpreadsheetsIntegration
             IEnumerable<TaskRecord> tasks)
         {
             using var writer = new StreamWriter(toSpreadsheetPath);
-            using var result = new CsvWriter(writer, CultureInfo.CurrentCulture);
+            using var result = new CsvWriter(writer, CultureInfo.InvariantCulture);
             result.Context.RegisterClassMap<TaskRecordMap>();
 
             result.WriteRecords(tasks);
