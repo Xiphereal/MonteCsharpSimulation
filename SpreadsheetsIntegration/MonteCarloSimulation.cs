@@ -6,7 +6,9 @@
             string fromSpreadsheetPath,
             string toSpreadsheetPath)
         {
-            File.Create(toSpreadsheetPath);
+            if (!File.Exists(fromSpreadsheetPath))
+                throw new FileNotFoundException();
+            using var disposedAtExitingScope = File.Create(toSpreadsheetPath);
         }
     }
 }

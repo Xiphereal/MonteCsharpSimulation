@@ -4,15 +4,37 @@ namespace SpreadsheetsIntegration.Tests
 {
     public class SpreadsheetsIntegrationTests
     {
+        private const string PathOfResultCsv = "Result.csv";
+        private const string PathOfSourceSpreadsheet = "./Files/ListOfTasksCompletionDates.csv";
+
         [Test]
         public void CreatesResultInCSV()
         {
             MonteCarloSimulation
                 .Simulate(
-                    fromSpreadsheetPath: "./Files/ListOfTasksCompletionDates.csv",
-                    toSpreadsheetPath: "Result.csv");
+                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                    toSpreadsheetPath: PathOfResultCsv);
 
-            File.Exists("Result.csv").Should().BeTrue();
+            File.Exists(PathOfResultCsv).Should().BeTrue();
+        }
+
+        [Test]
+        public void ThrowsIfNoSourceIsFound()
+        {
+            var sutInvocation = () =>
+                MonteCarloSimulation
+                    .Simulate(
+                        fromSpreadsheetPath: "Path/WhereThereIsNo/Spreadsheet",
+                        toSpreadsheetPath: PathOfResultCsv);
+
+            sutInvocation.Should().Throw<FileNotFoundException>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            if (File.Exists(PathOfResultCsv))
+                File.Delete(PathOfResultCsv);
         }
     }
 }
