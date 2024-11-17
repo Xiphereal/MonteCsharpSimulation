@@ -8,7 +8,7 @@ namespace SpreadsheetsIntegration.Tests
         private const string PathOfSourceSpreadsheet = "./Files/ListOfTasksCompletionDates.csv";
 
         [Test]
-        public void CreatesResultInCSV()
+        public void CreatesResultInCsv()
         {
             MonteCarloSimulation
                 .Simulate(

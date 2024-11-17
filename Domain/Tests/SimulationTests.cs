@@ -222,7 +222,8 @@ namespace Domain.Tests
         {
             var runs = new Random().Next(1, 10000);
 
-            Simulation.From(new Period(
+            Simulation
+                .From(new Period(
                     From: yesterday,
                     To: today,
                     TasksCompletionDates: [yesterday, today]))
