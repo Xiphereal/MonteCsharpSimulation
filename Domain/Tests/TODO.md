@@ -1,5 +1,4 @@
 - refactor: forecasted this, forecasted that...
-- test(property): total # of occurrences == # runs
 - test: what about the Time in DateTime?
 - test: throughput strategy selection theory "ForecastTakesLongerThanPeriod_ThroughputIsNotExhausted"
 - chore: review if license still applies
