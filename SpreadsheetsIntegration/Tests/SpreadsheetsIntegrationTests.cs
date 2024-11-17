@@ -19,6 +19,17 @@ namespace SpreadsheetsIntegration.Tests
         }
 
         [Test]
+        public void ResultContainsSomething()
+        {
+            MonteCarloSimulation
+                .Simulate(
+                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                    toSpreadsheetPath: PathOfResultCsv);
+
+            File.ReadAllText(PathOfResultCsv).Should().NotBeEmpty();
+        }
+
+        [Test]
         public void ThrowsIfNoSourceIsFound()
         {
             var sutInvocation = () =>
@@ -41,17 +52,6 @@ namespace SpreadsheetsIntegration.Tests
                     fromSpreadsheetPath: PathOfSourceSpreadsheet,
                     toSpreadsheetPath: PathOfResultCsv);
             File.Exists(PathOfResultCsv).Should().BeTrue();
-        }
-
-        [Test]
-        public void ResultContainsSomething()
-        {
-            MonteCarloSimulation
-                .Simulate(
-                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
-                    toSpreadsheetPath: PathOfResultCsv);
-
-            File.ReadAllText(PathOfResultCsv).Should().NotBeEmpty();
         }
 
         [TearDown]
