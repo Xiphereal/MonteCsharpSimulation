@@ -6,5 +6,6 @@ namespace Domain.Stragegies
     {
         void SimulateFor(Period period);
         int NextValue();
+        int NextValueNew(Period period);
     }
 }

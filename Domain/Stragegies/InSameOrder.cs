@@ -26,5 +26,11 @@ namespace Domain.Stragegies
             simulatedThroughtput = new Queue<int>(
                 period.ThroughputPerDay().Select(x => x.Throughput));
         }
+
+        public int NextValueNew(Period period)
+        {
+            SimulateFor(period);
+            return NextValue();
+        }
     }
 }

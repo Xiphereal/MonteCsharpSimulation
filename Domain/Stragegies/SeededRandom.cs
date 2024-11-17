@@ -27,5 +27,11 @@ namespace Domain.Stragegies
             return throughputPerDays
                 .ElementAt(this.random.Next(0, throughputPerDays.Count));
         }
+
+        public int NextValueNew(Period period)
+        {
+            SimulateFor(period);
+            return NextValue();
+        }
     }
 }
