@@ -1,4 +1,6 @@
-﻿# Monte CSharp Simulation
+﻿[![Build & test](https://github.com/Xiphereal/MonteCsharpSimulation/actions/workflows/BuildAndTest.yml/badge.svg?event=push)](https://github.com/Xiphereal/MonteCsharpSimulation/actions/workflows/BuildAndTest.yml)
+
+# Monte CSharp Simulation
 
 A simple implementation of the [Monte Carlo Simulation](https://en.wikipedia.org/wiki/Monte_Carlo_method) in C# for forecasting a bunch of task completion.
 
