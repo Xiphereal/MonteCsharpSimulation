@@ -6,7 +6,7 @@ using Domain.Stragegies;
 
 namespace SpreadsheetsIntegration
 {
-    public class MonteCarloSimulation
+    public static class MonteCarloSimulation
     {
         public static void Simulate(
             string fromSpreadsheetPath,
@@ -69,8 +69,6 @@ namespace SpreadsheetsIntegration
 
         private class TaskRecord
         {
-            public string Task { get; set; }
-            public DateTime Started { get; set; }
             public DateTime Delivered { get; set; }
         }
 
@@ -78,9 +76,6 @@ namespace SpreadsheetsIntegration
         {
             public TaskRecordMap()
             {
-                Map(m => m.Task).Name("Task");
-                Map(m => m.Started).Name("Started")
-                    .TypeConverterOption.Format("dd/MM/yy HH:mm");
                 Map(m => m.Delivered).Name("Delivered")
                     .TypeConverterOption.Format("dd/MM/yy HH:mm");
             }
