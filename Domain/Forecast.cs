@@ -4,12 +4,7 @@ namespace Domain
 {
     internal class Forecast : IReadOnlyList<Completion>
     {
-        private readonly List<Completion> completions;
-
-        public Forecast()
-        {
-            completions = [];
-        }
+        private readonly List<Completion> completions = [];
 
         public void Add(Completion completion)
         {
