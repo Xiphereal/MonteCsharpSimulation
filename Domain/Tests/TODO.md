@@ -6,4 +6,3 @@
 - feat: what if there is any issue reading/writing to the disk? Permissions, free space, etc.
 - feat: order Simulation Completions by date 
 - test: a bunch of tasks cannot be completed on single day if there isn't a day with, at least, that throughput
-- refactor: reduce TaskRecord 
