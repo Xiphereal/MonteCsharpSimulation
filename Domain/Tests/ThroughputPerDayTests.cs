@@ -3,7 +3,7 @@ using FluentAssertions.Extensions;
 
 namespace Domain.Tests
 {
-    public class ThoughputPerDayTests
+    public class ThroughputPerDayTests
     {
         private static readonly DateTime today = 1.February(2014);
         private static readonly DateTime yesterday = today.Subtract(1.Days());
@@ -49,7 +49,7 @@ namespace Domain.Tests
         }
 
         [Test]
-        public void ThroughputForDate_IsItsNumberOfOcurrences()
+        public void ThroughputForDate_IsItsNumberOfOccurrences()
         {
             new Period(
                     From: today,
@@ -83,7 +83,7 @@ namespace Domain.Tests
         }
 
         [Test]
-        public void DatesAreSortedAscendantly()
+        public void DatesAreSortedAscending()
         {
             new Period(
                     From: yesterday,
