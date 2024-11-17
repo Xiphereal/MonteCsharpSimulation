@@ -37,6 +37,21 @@ namespace SpreadsheetsIntegration.Tests
         }
 
         [Test]
+        public void ResultIsForecastedFromSourceSpreadsheet()
+        {
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv);
+
+            File.ReadLines(PathOfResultCsv)
+                .Should().BeEquivalentTo(
+                [
+                    "When,Occurrences",
+                    "11/18/2014 00:00:00,1"
+                ]);
+        }
+
+        [Test]
         public void ThrowsIfNoSourceIsFound()
         {
             var sutInvocation = () =>

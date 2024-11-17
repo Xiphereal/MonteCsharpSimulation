@@ -17,13 +17,14 @@ namespace SpreadsheetsIntegration
 
             var completions = Simulation
                 .From(new Period(
-                    from: DateTime.Now.AddDays(-1),
-                    to: DateTime.Now.AddDays(1),
-                    tasksCompletionDates: [DateTime.Now]))
+                    from: new DateTime(2024, 11, 15),
+                    to: new DateTime(2024, 11, 18),
+                    tasksCompletionDates: tasks
+                        .Select(x => x.Delivered)))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
-                    dayToStartForecastingFrom: DateTime.Now,
+                    dayToStartForecastingFrom: new DateTime(2014, 11, 17),
                     runs);
 
             Write(
