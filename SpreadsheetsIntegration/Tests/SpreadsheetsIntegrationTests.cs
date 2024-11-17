@@ -30,6 +30,17 @@ namespace SpreadsheetsIntegration.Tests
             sutInvocation.Should().Throw<FileNotFoundException>();
         }
 
+        [Test]
+        public void ResultContainsSomething()
+        {
+            MonteCarloSimulation
+                .Simulate(
+                    fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                    toSpreadsheetPath: PathOfResultCsv);
+
+            File.ReadAllText(PathOfResultCsv).Should().NotBeEmpty();
+        }
+
         [TearDown]
         public void TearDown()
         {

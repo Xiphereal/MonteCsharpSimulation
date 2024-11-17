@@ -3,3 +3,5 @@
 - test: what about the Time in DateTime?
 - refactor: remove unused random seeded  strategy
 - test: throughput strategy selection theory "ForecastTakesLongerThanPeriod_ThroughputIsNotExhausted"
+- chore: review if license still applies
+- feat: validate source CSV meets preconditions. What happens if the DateTime culture is different? Or its format?
