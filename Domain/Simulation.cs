@@ -45,7 +45,7 @@ namespace Domain
             return forecast;
         }
 
-        private static int ForecastCompletionDays(
+        private int ForecastCompletionDays(
             int numberOfTasks,
             IThroughputSelectionStrategy throughputSelectionStrategy)
         {
@@ -54,7 +54,7 @@ namespace Domain
             while (forecastedCompletedTasks > 0)
             {
                 forecastedCompletedTasks -=
-                    throughputSelectionStrategy.NextValue();
+                    throughputSelectionStrategy.NextValueNew(this.period);
 
                 forecastedCompletionDays++;
             }
