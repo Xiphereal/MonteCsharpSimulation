@@ -1,6 +1,8 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
+using Domain;
+using Domain.Stragegies;
 
 namespace SpreadsheetsIntegration
 {
@@ -8,11 +10,30 @@ namespace SpreadsheetsIntegration
     {
         public static void Simulate(
             string fromSpreadsheetPath,
-            string toSpreadsheetPath)
+            string toSpreadsheetPath,
+            int runs)
         {
             IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
 
-            Write(toSpreadsheetPath, tasks);
+            var completions = Simulation
+                .From(new Period(
+                    from: DateTime.Now.AddDays(-1),
+                    to: DateTime.Now.AddDays(1),
+                    tasksCompletionDates: [DateTime.Now]))
+                .For(
+                    numberOfTasks: 1,
+                    throughputSelectionStrategy: new InSameOrder(),
+                    dayToStartForecastingFrom: DateTime.Now,
+                    runs);
+
+            Write(
+                toSpreadsheetPath,
+                completions
+                    .Select(x => new CompletionRecord
+                    {
+                        When = x.When,
+                        Occurrences = x.Occurrences
+                    }));
         }
 
         private static IReadOnlyList<TaskRecord> Read(string fromSpreadsheetPath)
@@ -32,9 +53,8 @@ namespace SpreadsheetsIntegration
             return csv.GetRecords<TaskRecord>().ToArray();
         }
 
-        private static void Write(
-            string toSpreadsheetPath,
-            IEnumerable<TaskRecord> tasks)
+        private static void Write(string toSpreadsheetPath,
+            IEnumerable<CompletionRecord> completions)
         {
             if (File.Exists(toSpreadsheetPath))
                 File.Delete(toSpreadsheetPath);
@@ -43,17 +63,17 @@ namespace SpreadsheetsIntegration
             using var result = new CsvWriter(writer, CultureInfo.InvariantCulture);
             result.Context.RegisterClassMap<TaskRecordMap>();
 
-            result.WriteRecords(tasks);
+            result.WriteRecords(completions);
         }
 
-        public class TaskRecord
+        private class TaskRecord
         {
             public string Task { get; set; }
             public DateTime Started { get; set; }
             public DateTime Delivered { get; set; }
         }
 
-        public class TaskRecordMap : ClassMap<TaskRecord>
+        private class TaskRecordMap : ClassMap<TaskRecord>
         {
             public TaskRecordMap()
             {
@@ -63,6 +83,12 @@ namespace SpreadsheetsIntegration
                 Map(m => m.Delivered).Name("Delivered")
                     .TypeConverterOption.Format("dd/MM/yy HH:mm");
             }
+        }
+
+        private class CompletionRecord
+        {
+            public DateTime When { get; set; }
+            public int Occurrences { get; set; }
         }
     }
 }

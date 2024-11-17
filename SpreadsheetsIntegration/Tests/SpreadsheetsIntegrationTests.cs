@@ -17,14 +17,23 @@ namespace SpreadsheetsIntegration.Tests
             File.Exists(PathOfResultCsv).Should().BeTrue();
         }
 
-        [Test]
-        public void ResultContainsSomething()
+        [TestCase(1)]
+        [TestCase(10)]
+        [TestCase(200)]
+        public void ResultContainsHeadersPlusForecastedCompletions(int runs)
         {
             MonteCarloSimulation(
-                fromSpreadsheetPath: PathOfSourceSpreadsheet, 
-                toSpreadsheetPath: PathOfResultCsv);
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv,
+                runs: runs);
 
-            File.ReadAllLines(PathOfResultCsv).Should().HaveCount(3);
+            File.ReadAllLines(PathOfResultCsv)
+                .Should().HaveCountGreaterThan(
+                    1,
+                    because: "the headers row is always present");
+            
+            var headersRow = File.ReadAllLines(PathOfResultCsv).First();
+            headersRow.Should().ContainAll("When", "Occurrences");
         }
 
         [Test]
@@ -57,14 +66,15 @@ namespace SpreadsheetsIntegration.Tests
                 File.Delete(PathOfResultCsv);
         }
 
-        private static void MonteCarloSimulation(
-            string fromSpreadsheetPath,
-            string toSpreadsheetPath)
+        private static void MonteCarloSimulation(string fromSpreadsheetPath,
+            string toSpreadsheetPath,
+            int runs = 1)
         {
             SpreadsheetsIntegration.MonteCarloSimulation
                 .Simulate(
                     fromSpreadsheetPath: fromSpreadsheetPath,
-                    toSpreadsheetPath: toSpreadsheetPath);
+                    toSpreadsheetPath: toSpreadsheetPath,
+                    runs);
         }
     }
 }
