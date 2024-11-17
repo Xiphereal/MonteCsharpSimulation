@@ -6,3 +6,4 @@
 - feat: validate source CSV meets preconditions. What happens if the DateTime culture is different? Or its format?
 - feat: what if there is any issue writing to the disk? Permissions, free space, etc.
 - feat: what if the result file already exist?
+- feat: order Simulation Completions by date 
