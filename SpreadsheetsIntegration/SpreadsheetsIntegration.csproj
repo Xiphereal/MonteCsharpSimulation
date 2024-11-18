@@ -1,23 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Tests\**" />
-    <EmbeddedResource Remove="Tests\**" />
-    <None Remove="Tests\**" />
-  </ItemGroup>
+    <PropertyGroup>
+        <PackageId>MonteCSharpSimulation</PackageId>
+        <Version>0.1.0</Version>
+        <Authors>Xiphereal</Authors>
+        <Description>A simple implementation of the Monte Carlo Simulation in C# for forecasting a bunch of task completion.</Description>
+        <PackageTags>MonteCarloSimulation</PackageTags>
+        <PackageLicenseExpression>LGPL-3.0</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/Xiphereal/MonteCsharpSimulation</RepositoryUrl>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="33.0.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="Tests\**"/>
+        <EmbeddedResource Remove="Tests\**"/>
+        <None Remove="Tests\**"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="CsvHelper" Version="33.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Domain\Domain.csproj"/>
+    </ItemGroup>
 
 </Project>
