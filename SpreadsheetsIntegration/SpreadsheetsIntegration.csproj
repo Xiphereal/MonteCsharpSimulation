@@ -14,9 +14,13 @@
         <PackageTags>MonteCarloSimulation</PackageTags>
         <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/Xiphereal/MonteCsharpSimulation</RepositoryUrl>
-        <PackageReadmeFile>../README.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    
     <ItemGroup>
         <Compile Remove="Tests\**"/>
         <EmbeddedResource Remove="Tests\**"/>
