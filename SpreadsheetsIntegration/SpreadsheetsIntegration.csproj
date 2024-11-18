@@ -14,6 +14,7 @@
         <PackageTags>MonteCarloSimulation</PackageTags>
         <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/Xiphereal/MonteCsharpSimulation</RepositoryUrl>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
