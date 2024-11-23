@@ -8,6 +8,21 @@ namespace SpreadsheetsIntegration.Tests
         private const string PathOfSourceSpreadsheet = "./Files/ListOfTasksCompletionDates.csv";
 
         [Test]
+        public void Acceptance()
+        {
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv,
+                runs: 10);
+
+            File.ReadLines(PathOfResultCsv)
+                .Should().BeEquivalentTo(
+                    "When,Occurrences",
+                    "11/18/2014 00:00:00,6",
+                    "11/20/2014 00:00:00,4");
+        }
+        
+        [Test]
         public void CreatesResultInCsv()
         {
             MonteCarloSimulation(
