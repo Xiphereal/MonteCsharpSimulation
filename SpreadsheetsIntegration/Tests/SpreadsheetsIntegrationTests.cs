@@ -21,15 +21,15 @@ namespace SpreadsheetsIntegration.Tests
                 toSpreadsheetPath: PathOfResultCsv,
                 from: 14.November(2024),
                 to: 19.November(2024),
-                dayToStartForecastingFrom: 3.January(year: 2014),
+                dayToStartForecastingFrom: 3.January(year: 2025),
                 runs: 10);
 
             File.ReadLines(PathOfResultCsv)
                 .Should().BeEquivalentTo(
                     "When,Occurrences",
-                    "01/04/2014 00:00:00,5",
-                    "01/05/2014 00:00:00,1",
-                    "01/08/2014 00:00:00,4");
+                    "01/04/2025 00:00:00,5",
+                    "01/05/2025 00:00:00,1",
+                    "01/08/2025 00:00:00,4");
         }
 
         [Test]
