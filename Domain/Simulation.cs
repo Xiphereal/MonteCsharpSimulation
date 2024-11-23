@@ -25,6 +25,9 @@ namespace Domain
             if (this.period.IsEmpty)
                 return [];
 
+            if (runs < 1)
+                throw new ArgumentException("The number of runs must be greater than 0");
+
             var forecast = new Forecast();
 
             for (int i = 0; i < runs; i++)

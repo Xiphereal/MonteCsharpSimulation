@@ -145,6 +145,29 @@ namespace Domain.Tests
         }
 
         [Test]
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-43234)]
+        public void RunsHaveToBeAPositiveNumber(int runs)
+        {
+            var sutInvocation = () =>
+                Simulation
+                    .From(new Period(
+                        from: yesterday,
+                        to: today,
+                        tasksCompletionDates: [yesterday]))
+                    .For(
+                        numberOfTasks: 1,
+                        throughputSelectionStrategy: new InSameOrder(),
+                        dayToStartForecastingFrom: today,
+                        runs);
+
+            sutInvocation.Should()
+                .Throw<ArgumentException>()
+                .WithMessage("The number of runs must be greater than 0");
+        }
+
+        [Test]
         public void ForecastTakesLongerThanPeriod_ThroughputIsNotExhausted()
         {
             Simulation
