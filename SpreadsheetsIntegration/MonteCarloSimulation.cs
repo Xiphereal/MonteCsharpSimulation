@@ -20,7 +20,8 @@ namespace SpreadsheetsIntegration
                     from: new DateTime(2024, 11, 15),
                     to: new DateTime(2024, 11, 18),
                     tasksCompletionDates: tasks
-                        .Select(x => x.Delivered)))
+                        .Where(x => x.Delivered.HasValue)
+                        .Select(x => x.Delivered!.Value)))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -69,7 +70,7 @@ namespace SpreadsheetsIntegration
 
         private class TaskRecord
         {
-            public DateTime Delivered { get; set; }
+            public DateTime? Delivered { get; set; }
         }
 
         private class TaskRecordMap : ClassMap<TaskRecord>

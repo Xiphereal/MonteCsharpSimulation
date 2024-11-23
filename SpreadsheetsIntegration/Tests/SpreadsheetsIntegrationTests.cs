@@ -6,7 +6,10 @@ namespace SpreadsheetsIntegration.Tests
     public class SpreadsheetsIntegrationTests
     {
         private const string PathOfResultCsv = "Result.csv";
-        private const string PathOfSourceSpreadsheet = "./Files/ListOfTasksCompletionDates.csv";
+        private const string PathOfSourceSpreadsheet = 
+            "./Files/ListOfTasksCompletionDates.csv";
+        private const string PathOfSourceSpreadsheetWithNonDeliveredYetTasks = 
+            "./Files/ListOfTasksWithSomeNotDeliveredYet.csv";
 
         [Test]
         public void Acceptance()
@@ -64,10 +67,19 @@ namespace SpreadsheetsIntegration.Tests
 
             File.ReadLines(PathOfResultCsv)
                 .Should().BeEquivalentTo(
-                [
                     "When,Occurrences",
-                    "11/18/2014 00:00:00,1"
-                ]);
+                    "11/18/2014 00:00:00,1");
+        }
+
+        [Test]
+        public void TasksNotDeliveredYet_AreReadButNotTakenIntoAccount()
+        {
+            MonteCarloSimulation(
+                fromSpreadsheetPath: 
+                    PathOfSourceSpreadsheetWithNonDeliveredYetTasks,
+                toSpreadsheetPath: PathOfResultCsv);
+
+            File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
         }
 
         [Test]
