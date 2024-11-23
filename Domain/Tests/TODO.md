@@ -7,4 +7,4 @@
 - feat: allow specifying the header names to prevent users from changing their spreadsheets headers just for this to work
 - feat: support missing Delivered dates
 - feat: make Spreadsheet integration to calculate the Period from an input DateTime range
-- feat: make Spreadsheet integration to receive the dayToStartForecastingFrom
+- feat: ensure Completions are written into the result CSV with the same culture the read Period had

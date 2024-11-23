@@ -8,10 +8,10 @@ namespace SpreadsheetsIntegration
 {
     public static class MonteCarloSimulation
     {
-        public static void Simulate(
-            string fromSpreadsheetPath,
+        public static void Simulate(string fromSpreadsheetPath,
             string toSpreadsheetPath,
-            int runs)
+            int runs, 
+            DateTime dayToStartForecastingFrom)
         {
             IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
 
@@ -24,7 +24,7 @@ namespace SpreadsheetsIntegration
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
-                    dayToStartForecastingFrom: new DateTime(2014, 11, 17),
+                    dayToStartForecastingFrom,
                     runs);
 
             Write(

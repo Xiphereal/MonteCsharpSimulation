@@ -1,4 +1,5 @@
 using FluentAssertions;
+using FluentAssertions.Extensions;
 
 namespace SpreadsheetsIntegration.Tests
 {
@@ -13,13 +14,16 @@ namespace SpreadsheetsIntegration.Tests
             MonteCarloSimulation(
                 fromSpreadsheetPath: PathOfSourceSpreadsheet,
                 toSpreadsheetPath: PathOfResultCsv,
-                runs: 10);
+                runs: 10,
+                dayToStartForecastingFrom: 3.January(year: 2014));
 
+            TestContext.Out.Write(File.ReadAllText(PathOfResultCsv));
+            
             File.ReadLines(PathOfResultCsv)
                 .Should().BeEquivalentTo(
                     "When,Occurrences",
-                    "11/18/2014 00:00:00,6",
-                    "11/20/2014 00:00:00,4");
+                    "01/04/2014 00:00:00,6",
+                    "01/06/2014 00:00:00,4");
         }
         
         [Test]
@@ -98,13 +102,15 @@ namespace SpreadsheetsIntegration.Tests
 
         private static void MonteCarloSimulation(string fromSpreadsheetPath,
             string toSpreadsheetPath,
-            int runs = 1)
+            int runs = 1, 
+            DateTime? dayToStartForecastingFrom = null)
         {
             SpreadsheetsIntegration.MonteCarloSimulation
                 .Simulate(
                     fromSpreadsheetPath: fromSpreadsheetPath,
                     toSpreadsheetPath: toSpreadsheetPath,
-                    runs);
+                    runs,
+                    dayToStartForecastingFrom ?? 17.November(year: 2014));
         }
     }
 }
