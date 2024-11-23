@@ -6,9 +6,11 @@ namespace SpreadsheetsIntegration.Tests
     public class SpreadsheetsIntegrationTests
     {
         private const string PathOfResultCsv = "Result.csv";
-        private const string PathOfSourceSpreadsheet = 
+
+        private const string PathOfSourceSpreadsheet =
             "./Files/ListOfTasksCompletionDates.csv";
-        private const string PathOfSourceSpreadsheetWithNonDeliveredYetTasks = 
+
+        private const string PathOfSourceSpreadsheetWithNonDeliveredYetTasks =
             "./Files/ListOfTasksWithSomeNotDeliveredYet.csv";
 
         [Test]
@@ -17,18 +19,19 @@ namespace SpreadsheetsIntegration.Tests
             MonteCarloSimulation(
                 fromSpreadsheetPath: PathOfSourceSpreadsheet,
                 toSpreadsheetPath: PathOfResultCsv,
-                dayToStartForecastingFrom: 3.January(year: 2014), 
+                from: 14.November(2024),
+                to: 19.November(2024),
+                dayToStartForecastingFrom: 3.January(year: 2014),
                 runs: 10);
 
-            TestContext.Out.Write(File.ReadAllText(PathOfResultCsv));
-            
             File.ReadLines(PathOfResultCsv)
                 .Should().BeEquivalentTo(
                     "When,Occurrences",
-                    "01/04/2014 00:00:00,6",
-                    "01/06/2014 00:00:00,4");
+                    "01/04/2014 00:00:00,5",
+                    "01/05/2014 00:00:00,1",
+                    "01/08/2014 00:00:00,4");
         }
-        
+
         [Test]
         public void CreatesResultInCsv()
         {
@@ -53,7 +56,7 @@ namespace SpreadsheetsIntegration.Tests
                 .Should().HaveCountGreaterThan(
                     1,
                     because: "the headers row is always present");
-            
+
             var headersRow = File.ReadAllLines(PathOfResultCsv).First();
             headersRow.Should().ContainAll("When", "Occurrences");
         }
@@ -111,8 +114,11 @@ namespace SpreadsheetsIntegration.Tests
                 File.Delete(PathOfResultCsv);
         }
 
-        private static void MonteCarloSimulation(string fromSpreadsheetPath,
+        private static void MonteCarloSimulation(
+            string fromSpreadsheetPath,
             string toSpreadsheetPath,
+            DateTime? from = null,
+            DateTime? to = null,
             DateTime? dayToStartForecastingFrom = null,
             int runs = 1)
         {
@@ -120,6 +126,8 @@ namespace SpreadsheetsIntegration.Tests
                 .Simulate(
                     fromSpreadsheetPath: fromSpreadsheetPath,
                     toSpreadsheetPath: toSpreadsheetPath,
+                    from: from ?? 15.November(2024),
+                    to: to ?? 18.November(2024),
                     runs,
                     dayToStartForecastingFrom ?? 17.November(year: 2014));
         }

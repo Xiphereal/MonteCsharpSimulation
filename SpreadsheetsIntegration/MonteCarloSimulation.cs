@@ -8,20 +8,24 @@ namespace SpreadsheetsIntegration
 {
     public static class MonteCarloSimulation
     {
-        public static void Simulate(string fromSpreadsheetPath,
+        public static void Simulate(
+            string fromSpreadsheetPath,
             string toSpreadsheetPath,
-            int runs, 
+            DateTime from,
+            DateTime to,
+            int runs,
             DateTime dayToStartForecastingFrom)
         {
             IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
 
             var completions = Simulation
-                .From(new Period(
-                    from: new DateTime(2024, 11, 15),
-                    to: new DateTime(2024, 11, 18),
-                    tasksCompletionDates: tasks
-                        .Where(x => x.Delivered.HasValue)
-                        .Select(x => x.Delivered!.Value)))
+                .From(
+                    new Period(
+                        from,
+                        to,
+                        tasksCompletionDates: tasks
+                            .Where(x => x.Delivered.HasValue)
+                            .Select(x => x.Delivered!.Value)))
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -31,11 +35,12 @@ namespace SpreadsheetsIntegration
             Write(
                 toSpreadsheetPath,
                 completions
-                    .Select(x => new CompletionRecord
-                    {
-                        When = x.When,
-                        Occurrences = x.Occurrences
-                    }));
+                    .Select(
+                        x => new CompletionRecord
+                        {
+                            When = x.When,
+                            Occurrences = x.Occurrences
+                        }));
         }
 
         private static IReadOnlyList<TaskRecord> Read(string fromSpreadsheetPath)
@@ -55,12 +60,13 @@ namespace SpreadsheetsIntegration
             return csv.GetRecords<TaskRecord>().ToArray();
         }
 
-        private static void Write(string toSpreadsheetPath,
+        private static void Write(
+            string toSpreadsheetPath,
             IEnumerable<CompletionRecord> completions)
         {
             if (File.Exists(toSpreadsheetPath))
                 File.Delete(toSpreadsheetPath);
-            
+
             using var writer = new StreamWriter(toSpreadsheetPath);
             using var result = new CsvWriter(writer, CultureInfo.InvariantCulture);
             result.Context.RegisterClassMap<TaskRecordMap>();
