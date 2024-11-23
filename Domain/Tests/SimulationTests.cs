@@ -1,4 +1,5 @@
-﻿using Domain.Stragegies;
+﻿using System.Diagnostics;
+using Domain.Stragegies;
 using FluentAssertions;
 using FluentAssertions.Extensions;
 
@@ -40,7 +41,8 @@ namespace Domain.Tests
                     new Completion(when: 18.March(2010), occurrences: 1),
                     new Completion(when: 20.March(2010), occurrences: 1),
                     new Completion(when: 24.March(2010), occurrences: 1),
-                ]);
+                ],
+                options => options.WithStrictOrdering());
         }
 
         [Test]
@@ -246,10 +248,7 @@ namespace Domain.Tests
             var runs = new Random().Next(1, 10000);
 
             Simulation
-                .From(new Period(
-                    from: yesterday,
-                    to: today,
-                    tasksCompletionDates: [yesterday, today]))
+                .From(AnyPeriodWithCompletedTasks())
                 .For(
                     numberOfTasks: 1,
                     throughputSelectionStrategy: new InSameOrder(),
@@ -257,5 +256,29 @@ namespace Domain.Tests
                     runs: runs
                 ).Sum(x => x.Occurrences).Should().Be(runs);
         }
+
+        [Test]
+        public void CompletionDatesAreSortedAscending()
+        {
+            var readOnlyList = Simulation
+                .From(AnyPeriodWithCompletedTasks())
+                .For(
+                    numberOfTasks: 2,
+                    throughputSelectionStrategy: new SeededRandom(1),
+                    today,
+                    runs: 2);
+            readOnlyList.Should().HaveCountGreaterThan(1);
+            
+            readOnlyList.Should().BeInAscendingOrder();
+        }
+        
+        private static Period AnyPeriodWithCompletedTasks()
+        {
+            return new Period(
+                from: yesterday,
+                to: today.AddDays(5),
+                tasksCompletionDates: [today]);
+        }
+
     }
 }

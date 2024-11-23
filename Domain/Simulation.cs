@@ -43,7 +43,7 @@ namespace Domain
                     occurrences: 1));
             }
 
-            return forecast;
+            return forecast.Order().ToArray();
         }
 
         private int ForecastCompletionDays(
