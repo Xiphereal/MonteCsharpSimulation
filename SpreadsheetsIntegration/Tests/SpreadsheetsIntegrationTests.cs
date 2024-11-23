@@ -17,8 +17,8 @@ namespace SpreadsheetsIntegration.Tests
             MonteCarloSimulation(
                 fromSpreadsheetPath: PathOfSourceSpreadsheet,
                 toSpreadsheetPath: PathOfResultCsv,
-                runs: 10,
-                dayToStartForecastingFrom: 3.January(year: 2014));
+                dayToStartForecastingFrom: 3.January(year: 2014), 
+                runs: 10);
 
             TestContext.Out.Write(File.ReadAllText(PathOfResultCsv));
             
@@ -75,8 +75,7 @@ namespace SpreadsheetsIntegration.Tests
         public void TasksNotDeliveredYet_AreReadButNotTakenIntoAccount()
         {
             MonteCarloSimulation(
-                fromSpreadsheetPath: 
-                    PathOfSourceSpreadsheetWithNonDeliveredYetTasks,
+                fromSpreadsheetPath: PathOfSourceSpreadsheetWithNonDeliveredYetTasks,
                 toSpreadsheetPath: PathOfResultCsv);
 
             File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
@@ -114,8 +113,8 @@ namespace SpreadsheetsIntegration.Tests
 
         private static void MonteCarloSimulation(string fromSpreadsheetPath,
             string toSpreadsheetPath,
-            int runs = 1, 
-            DateTime? dayToStartForecastingFrom = null)
+            DateTime? dayToStartForecastingFrom = null,
+            int runs = 1)
         {
             SpreadsheetsIntegration.MonteCarloSimulation
                 .Simulate(
