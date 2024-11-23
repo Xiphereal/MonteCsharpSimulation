@@ -11,7 +11,7 @@
         <Version>0.1.0-alpha</Version>
         <Authors>Xiphereal</Authors>
         <Description>A simple implementation of the Monte Carlo Simulation in C# for forecasting a bunch of task completion.</Description>
-        <PackageTags>MonteCarloSimulation</PackageTags>
+        <PackageTags>MonteCarloSimulation,Monte,Carlo,simulation,task,task completion,forecast,estimate,estimation</PackageTags>
         <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/Xiphereal/MonteCsharpSimulation</RepositoryUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
