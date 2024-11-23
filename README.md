@@ -1,4 +1,6 @@
 ﻿[![Build & test](https://github.com/Xiphereal/MonteCsharpSimulation/actions/workflows/BuildAndTest.yml/badge.svg?event=push)](https://github.com/Xiphereal/MonteCsharpSimulation/actions/workflows/BuildAndTest.yml)
+[![NuGet](https://img.shields.io/nuget/v/MonteCsharpSimulation.svg)](https://www.nuget.org/packages/MonteCSharpSimulation/) 
+[![Downloads](https://img.shields.io/nuget/dt/MonteCsharpSimulation.svg)](https://www.nuget.org/packages/MonteCSharpSimulation/)
 
 # Monte CSharp Simulation
 
