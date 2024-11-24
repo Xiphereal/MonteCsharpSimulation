@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Domain.Stragegies
+namespace Domain.Strategies
 {
     public class SeededRandom : IThroughputSelectionStrategy
     {

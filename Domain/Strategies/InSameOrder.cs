@@ -1,5 +1,5 @@
 ﻿
-namespace Domain.Stragegies
+namespace Domain.Strategies
 {
     public class InSameOrder : IThroughputSelectionStrategy
     {

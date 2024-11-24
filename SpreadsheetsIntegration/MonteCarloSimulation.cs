@@ -2,7 +2,7 @@
 using CsvHelper.Configuration;
 using System.Globalization;
 using Domain;
-using Domain.Stragegies;
+using Domain.Strategies;
 
 namespace SpreadsheetsIntegration
 {

@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Domain.Stragegies;
+using Domain.Strategies;
 using FluentAssertions;
 using FluentAssertions.Extensions;
 

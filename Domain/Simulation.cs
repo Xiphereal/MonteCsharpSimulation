@@ -1,4 +1,4 @@
-﻿using Domain.Stragegies;
+﻿using Domain.Strategies;
 
 namespace Domain
 {
