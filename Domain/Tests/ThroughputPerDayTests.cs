@@ -112,5 +112,17 @@ namespace Domain.Tests
                     new ThroughputPerDay(Date: tomorrow, Throughput: 1),
                 ]);
         }
+
+        [Test]
+        public void TaskCompletionDatesMayExceedPeriod_BecauseASubPeriodMayHaveBeenChosenFromTheOverallData()
+        {
+            var sutInvocation = () => new Period(
+                    from: yesterday,
+                    to: today,
+                    tasksCompletionDates: [today, tomorrow])
+                .ThroughputPerDay();
+
+            sutInvocation.Should().NotThrow();
+        }
     }
 }

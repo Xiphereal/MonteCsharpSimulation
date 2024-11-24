@@ -14,9 +14,6 @@
             if (from > to)
                 throw new ArgumentException();
 
-            if (tasksCompletionDates.Any(x => x.Date < from || x.Date > to))
-                throw new ArgumentException();
-
             this.from = from;
             this.to = to;
             this.tasksCompletionDates = tasksCompletionDates;
