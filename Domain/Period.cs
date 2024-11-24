@@ -16,7 +16,8 @@
 
             this.from = from;
             this.to = to;
-            this.tasksCompletionDates = tasksCompletionDates;
+            this.tasksCompletionDates = tasksCompletionDates
+                .Select(x => x.Date);
         }
 
         public bool IsEmpty => !tasksCompletionDates.Any();
@@ -29,7 +30,7 @@
                     .OrderBy(x => x.Date);
         }
 
-        private IEnumerable<DateTime> DatesWithNoCompletedTask() => 
+        private IEnumerable<DateTime> DatesWithNoCompletedTask() =>
             EnumerateAllInBetween(from, to).Except(tasksCompletionDates);
 
         private static IEnumerable<ThroughputPerDay> ZeroThroughputPerDayFor(
@@ -37,18 +38,27 @@
         {
             return dates
                 .GroupBy(x => x.Date)
-                .Select(x => new ThroughputPerDay(
-                    Date: x.Key,
-                    Throughput: 0));
+                .Select(
+                    x => new ThroughputPerDay(
+                        Date: x.Key,
+                        Throughput: 0));
         }
 
-        private IEnumerable<ThroughputPerDay> ThroughputPerDayForDatesWithAnyCompletedTask()
+        private IEnumerable<ThroughputPerDay> 
+            ThroughputPerDayForDatesWithAnyCompletedTask()
         {
             return tasksCompletionDates
+                .Where(x => IsWithin(from, to, x))
                 .GroupBy(x => x.Date)
-                .Select(x => new ThroughputPerDay(
-                    Date: x.Key,
-                    Throughput: x.Count()));
+                .Select(
+                    x => new ThroughputPerDay(
+                        Date: x.Key,
+                        Throughput: x.Count()));
+        }
+
+        private bool IsWithin(DateTime from, DateTime to, DateTime x)
+        {
+            return from <= x && x <= to;
         }
 
         private static IEnumerable<DateTime> EnumerateAllInBetween(

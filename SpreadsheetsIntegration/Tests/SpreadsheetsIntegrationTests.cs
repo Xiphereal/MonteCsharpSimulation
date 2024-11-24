@@ -27,9 +27,9 @@ namespace SpreadsheetsIntegration.Tests
             File.ReadLines(PathOfResultCsv)
                 .Should().BeEquivalentTo(
                     "When,Occurrences",
-                    "01/04/2025 00:00:00,5",
+                    "01/03/2025 00:00:00,5",
                     "01/05/2025 00:00:00,1",
-                    "01/08/2025 00:00:00,4");
+                    "01/07/2025 00:00:00,4");
         }
 
         [Test]

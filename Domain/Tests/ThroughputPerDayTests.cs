@@ -26,11 +26,11 @@ namespace Domain.Tests
                     from: today,
                     to: today,
                     tasksCompletionDates: [])
-               .ThroughputPerDay()
-               .Should().BeEquivalentTo(
-               [
-                   new ThroughputPerDay(Date: today, Throughput: 0)
-               ]);
+                .ThroughputPerDay()
+                .Should().BeEquivalentTo(
+                [
+                    new ThroughputPerDay(Date: today, Throughput: 0)
+                ]);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace Domain.Tests
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: yesterday, Throughput: 1),
-                    new ThroughputPerDay(Date: today, Throughput:1),
+                    new ThroughputPerDay(Date: today, Throughput: 1),
                 ]);
         }
 
@@ -59,6 +59,21 @@ namespace Domain.Tests
                 .Should().BeEquivalentTo(
                 [
                     new ThroughputPerDay(Date: today, Throughput: 2),
+                ]);
+        }
+
+        [Test]
+        public void AnyCompletedTaskDuringTheDay_CountsTowardsIt()
+        {
+            new Period(
+                    from: yesterday,
+                    to: today,
+                    tasksCompletionDates: [yesterday.AddSeconds(1)])
+                .ThroughputPerDay()
+                .Should().BeEquivalentTo(
+                [
+                    new ThroughputPerDay(Date: yesterday, Throughput: 1),
+                    new ThroughputPerDay(Date: today, Throughput: 0),
                 ]);
         }
 
@@ -91,10 +106,11 @@ namespace Domain.Tests
                     [today, yesterday])
                 .ThroughputPerDay()
                 .Should().BeEquivalentTo(
-                [
-                    new ThroughputPerDay(Date: yesterday, Throughput: 1),
-                    new ThroughputPerDay(Date: today, Throughput: 1),
-                ], options => options.WithStrictOrdering());
+                    [
+                        new ThroughputPerDay(Date: yesterday, Throughput: 1),
+                        new ThroughputPerDay(Date: today, Throughput: 1),
+                    ],
+                    options => options.WithStrictOrdering());
         }
 
         [Test]
@@ -114,7 +130,8 @@ namespace Domain.Tests
         }
 
         [Test]
-        public void TaskCompletionDatesMayExceedPeriod_BecauseASubPeriodMayHaveBeenChosenFromTheOverallData()
+        public void
+            TaskCompletionDatesMayExceedPeriod_BecauseASubPeriodMayHaveBeenChosenFromTheOverallData()
         {
             var sutInvocation = () => new Period(
                     from: yesterday,
@@ -123,6 +140,17 @@ namespace Domain.Tests
                 .ThroughputPerDay();
 
             sutInvocation.Should().NotThrow();
+        }
+
+        [Test]
+        public void OnlyTaskCompletionDatesWithinPeriod_HaveTheirThroughputCalculated()
+        {
+            new Period(
+                    from: today,
+                    to: today,
+                    tasksCompletionDates: [today, tomorrow])
+                .ThroughputPerDay()
+                .Should().ContainSingle();
         }
     }
 }
