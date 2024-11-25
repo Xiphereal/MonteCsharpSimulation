@@ -12,6 +12,9 @@ namespace SpreadsheetsIntegration.Tests
 
         private const string PathOfSourceSpreadsheetWithNonDeliveredYetTasks =
             "./Files/ListOfTasksWithSomeNotDeliveredYet.csv";
+        
+        private const string PathOfSourceSpreadsheetWithTasksWithoutTime =
+            "./Files/SomeTasksDeliveredHaveNoTime.csv";
 
         [Test]
         public void Acceptance()
@@ -84,6 +87,16 @@ namespace SpreadsheetsIntegration.Tests
             File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
         }
 
+        [Test]
+        public void TasksWhoseDeliveredHaveNoTime_CanBeRead()
+        {
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheetWithTasksWithoutTime,
+                toSpreadsheetPath: PathOfResultCsv);
+
+            File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
+        }
+        
         [Test]
         public void ThrowsIfNoSourceIsFound()
         {

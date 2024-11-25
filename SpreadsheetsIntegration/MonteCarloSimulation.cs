@@ -88,7 +88,9 @@ namespace SpreadsheetsIntegration
                 Map(m => m.Delivered)
                     .Name("Delivered")
                     .TypeConverterOption
-                    .Format("dd/MM/yyyy HH:mm");
+                    .Format(
+                        "dd/MM/yyyy HH:mm",
+                        "dd/MM/yyyy H:mm");
             }
         }
 
