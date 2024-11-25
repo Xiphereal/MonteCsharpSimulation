@@ -8,7 +8,7 @@ namespace SpreadsheetsIntegration
 {
     public static class MonteCarloSimulation
     {
-        private const string Delimiter = ",";
+        private const string Delimiter = ";";
 
         public static void Simulate(
             string fromSpreadsheetPath,

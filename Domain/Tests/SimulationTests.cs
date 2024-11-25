@@ -246,7 +246,8 @@ namespace Domain.Tests
         public void AlwaysGenerateOneCompletionPerRun()
         {
             var runs = new Random().Next(1, 10000);
-
+            
+            // TODO: this will benefit from a random selection strategy.
             Simulation
                 .From(AnyPeriodWithCompletedTasks())
                 .For(
