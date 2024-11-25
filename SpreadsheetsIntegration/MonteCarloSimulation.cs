@@ -85,8 +85,10 @@ namespace SpreadsheetsIntegration
         {
             public TaskRecordMap()
             {
-                Map(m => m.Delivered).Name("Delivered")
-                    .TypeConverterOption.Format("dd/MM/yy HH:mm");
+                Map(m => m.Delivered)
+                    .Name("Delivered")
+                    .TypeConverterOption
+                    .Format("dd/MM/yyyy HH:mm");
             }
         }
 
