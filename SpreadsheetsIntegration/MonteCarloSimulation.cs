@@ -8,6 +8,12 @@ namespace SpreadsheetsIntegration
 {
     public static class MonteCarloSimulation
     {
+        private static readonly CsvConfiguration CsvConfiguration =
+            new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = Delimiter,
+            };
+
         private const string Delimiter = ";";
 
         public static void Simulate(
@@ -51,12 +57,7 @@ namespace SpreadsheetsIntegration
                 throw new FileNotFoundException();
 
             using var reader = new StreamReader(fromSpreadsheetPath);
-            using var csv = new CsvReader(
-                reader,
-                new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = Delimiter,
-                });
+            using var csv = new CsvReader(reader, CsvConfiguration);
             csv.Context.RegisterClassMap<TaskRecordMap>();
 
             return csv.GetRecords<TaskRecord>().ToArray();
@@ -70,7 +71,7 @@ namespace SpreadsheetsIntegration
                 File.Delete(toSpreadsheetPath);
 
             using var writer = new StreamWriter(toSpreadsheetPath);
-            using var result = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            using var result = new CsvWriter(writer, CsvConfiguration);
             result.Context.RegisterClassMap<TaskRecordMap>();
 
             result.WriteRecords(completions);
