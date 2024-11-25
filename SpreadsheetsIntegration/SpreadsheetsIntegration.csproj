@@ -8,7 +8,7 @@
 
     <PropertyGroup>
         <PackageId>MonteCSharpSimulation</PackageId>
-        <Version>0.3.1-alpha</Version>
+        <Version>0.3.2-alpha</Version>
         <Authors>Xiphereal</Authors>
         <Description>A simple implementation of the Monte Carlo Simulation in C# for forecasting a bunch of task completion.</Description>
         <PackageTags>MonteCarloSimulation,Monte,Carlo,simulation,task,task completion,forecast,estimate,estimation</PackageTags>
@@ -34,14 +34,5 @@
     <ItemGroup>
         <ProjectReference Include="..\Domain\Domain.csproj"/>
     </ItemGroup>
-
-    <Target Name="IncludeDomainDll" AfterTargets="Pack">
-        <ItemGroup>
-            <!-- Locate the internal project DLL dynamically -->
-            <None Include="$(SolutionDir)Domain\bin\$(Configuration)\$(TargetFramework)\Domain.dll"
-                  Pack="true"
-                  PackagePath="lib/$(TargetFramework)/"/>
-        </ItemGroup>
-    </Target>
 
 </Project>
