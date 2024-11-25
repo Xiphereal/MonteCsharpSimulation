@@ -8,6 +8,8 @@ namespace SpreadsheetsIntegration
 {
     public static class MonteCarloSimulation
     {
+        private const string Delimiter = ",";
+
         public static void Simulate(
             string fromSpreadsheetPath,
             string toSpreadsheetPath,
@@ -53,7 +55,7 @@ namespace SpreadsheetsIntegration
                 reader,
                 new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
-                    Delimiter = ",",
+                    Delimiter = Delimiter,
                 });
             csv.Context.RegisterClassMap<TaskRecordMap>();
 
