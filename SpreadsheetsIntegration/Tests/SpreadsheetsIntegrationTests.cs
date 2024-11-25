@@ -12,7 +12,7 @@ namespace SpreadsheetsIntegration.Tests
 
         private const string PathOfSourceSpreadsheetWithNonDeliveredYetTasks =
             "./Files/ListOfTasksWithSomeNotDeliveredYet.csv";
-        
+
         private const string PathOfSourceSpreadsheetWithTasksWithoutTime =
             "./Files/SomeTasksDeliveredHaveNoTime.csv";
 
@@ -42,6 +42,18 @@ namespace SpreadsheetsIntegration.Tests
                 fromSpreadsheetPath: PathOfSourceSpreadsheet,
                 toSpreadsheetPath: PathOfResultCsv);
 
+            File.Exists(PathOfResultCsv).Should().BeTrue();
+        }
+
+        [Test]
+        public void DeletesPreviousResult()
+        {
+            File.Create(PathOfResultCsv).Dispose();
+            File.Exists(PathOfResultCsv).Should().BeTrue();
+
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv);
             File.Exists(PathOfResultCsv).Should().BeTrue();
         }
 
@@ -96,7 +108,7 @@ namespace SpreadsheetsIntegration.Tests
 
             File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
         }
-        
+
         [Test]
         public void ThrowsIfNoSourceIsFound()
         {
@@ -108,17 +120,6 @@ namespace SpreadsheetsIntegration.Tests
             sutInvocation.Should().Throw<FileNotFoundException>();
         }
 
-        [Test]
-        public void DeletesPreviousResult()
-        {
-            File.Create(PathOfResultCsv).Dispose();
-            File.Exists(PathOfResultCsv).Should().BeTrue();
-
-            MonteCarloSimulation(
-                fromSpreadsheetPath: PathOfSourceSpreadsheet,
-                toSpreadsheetPath: PathOfResultCsv);
-            File.Exists(PathOfResultCsv).Should().BeTrue();
-        }
 
         [TearDown]
         public void TearDown()
