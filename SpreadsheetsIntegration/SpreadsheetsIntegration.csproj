@@ -8,7 +8,7 @@
 
     <PropertyGroup>
         <PackageId>MonteCSharpSimulation</PackageId>
-        <Version>0.3.0-alpha</Version>
+        <Version>0.3.1-alpha</Version>
         <Authors>Xiphereal</Authors>
         <Description>A simple implementation of the Monte Carlo Simulation in C# for forecasting a bunch of task completion.</Description>
         <PackageTags>MonteCarloSimulation,Monte,Carlo,simulation,task,task completion,forecast,estimate,estimation</PackageTags>
