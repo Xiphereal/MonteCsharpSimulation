@@ -20,7 +20,7 @@
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
-    
+
     <ItemGroup>
         <Compile Remove="Tests\**"/>
         <EmbeddedResource Remove="Tests\**"/>
@@ -34,5 +34,14 @@
     <ItemGroup>
         <ProjectReference Include="..\Domain\Domain.csproj"/>
     </ItemGroup>
+
+    <Target Name="IncludeDomainDll" AfterTargets="Pack">
+        <ItemGroup>
+            <!-- Locate the internal project DLL dynamically -->
+            <None Include="$(SolutionDir)Domain\bin\$(Configuration)\$(TargetFramework)\Domain.dll"
+                  Pack="true"
+                  PackagePath="lib/$(TargetFramework)/"/>
+        </ItemGroup>
+    </Target>
 
 </Project>
