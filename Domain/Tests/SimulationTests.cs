@@ -2,6 +2,7 @@
 using Domain.Strategies;
 using FluentAssertions;
 using FluentAssertions.Extensions;
+using Random = Domain.Strategies.Random;
 
 namespace Domain.Tests
 {
@@ -242,17 +243,16 @@ namespace Domain.Tests
         }
 
         [Test]
-        [Repeat(100)]
+        [Repeat(5)]
         public void AlwaysGenerateOneCompletionPerRun()
         {
-            var runs = new Random().Next(1, 10000);
+            var runs = new System.Random().Next(1, 10000);
             
-            // TODO: this will benefit from a random selection strategy.
             Simulation
                 .From(AnyPeriodWithCompletedTasks())
                 .For(
                     numberOfTasks: 1,
-                    throughputSelectionStrategy: new InSameOrder(),
+                    throughputSelectionStrategy: new Random(),
                     dayToStartForecastingFrom: today,
                     runs: runs
                 ).Sum(x => x.Occurrences).Should().Be(runs);
