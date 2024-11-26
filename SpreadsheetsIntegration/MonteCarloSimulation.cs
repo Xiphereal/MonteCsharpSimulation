@@ -21,8 +21,43 @@ namespace SpreadsheetsIntegration
             string toSpreadsheetPath,
             DateTime from,
             DateTime to,
-            int runs,
             DateTime dayToStartForecastingFrom,
+            Configuration config)
+        {
+            IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
+
+            var completions = Simulation
+                .From(
+                    new Period(
+                        from,
+                        to,
+                        tasksCompletionDates: tasks
+                            .Where(x => x.Delivered.HasValue)
+                            .Select(x => x.Delivered!.Value)))
+                .For(
+                    numberOfTasks: 1,
+                    config.ThroughputSelectionStrategy,
+                    dayToStartForecastingFrom,
+                    config.Runs);
+
+            Write(
+                toSpreadsheetPath,
+                completions
+                    .Select(
+                        x => new CompletionRecord
+                        {
+                            When = x.When,
+                            Occurrences = x.Occurrences
+                        }));
+        }
+        
+        public static void Simulate(
+            string fromSpreadsheetPath,
+            string toSpreadsheetPath,
+            DateTime from,
+            DateTime to,
+            DateTime dayToStartForecastingFrom,
+            int runs,
             IThroughputSelectionStrategy? throughputSelectionStrategy = null)
         {
             throughputSelectionStrategy ??= new Random();
