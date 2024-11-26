@@ -8,13 +8,12 @@ namespace SpreadsheetsIntegration
 {
     public static class MonteCarloSimulation
     {
+        private const string Delimiter = ";";
         private static readonly CsvConfiguration CsvConfiguration =
-            new CsvConfiguration(CultureInfo.InvariantCulture)
+            new(CultureInfo.InvariantCulture)
             {
                 Delimiter = Delimiter,
             };
-
-        private const string Delimiter = ";";
 
         public static void Simulate(
             string fromSpreadsheetPath,
