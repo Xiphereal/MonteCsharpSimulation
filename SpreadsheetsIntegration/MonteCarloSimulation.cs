@@ -21,6 +21,7 @@ namespace SpreadsheetsIntegration
             string toSpreadsheetPath,
             DateTime from,
             DateTime to,
+            IThroughputSelectionStrategy throughputSelectionStrategy,
             int runs,
             DateTime dayToStartForecastingFrom)
         {
@@ -36,7 +37,7 @@ namespace SpreadsheetsIntegration
                             .Select(x => x.Delivered!.Value)))
                 .For(
                     numberOfTasks: 1,
-                    throughputSelectionStrategy: new InSameOrder(),
+                    throughputSelectionStrategy,
                     dayToStartForecastingFrom,
                     runs);
 

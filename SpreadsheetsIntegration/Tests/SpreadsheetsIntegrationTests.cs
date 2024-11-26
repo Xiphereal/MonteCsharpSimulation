@@ -1,3 +1,4 @@
+using Domain.Strategies;
 using FluentAssertions;
 using FluentAssertions.Extensions;
 
@@ -142,6 +143,7 @@ namespace SpreadsheetsIntegration.Tests
                     toSpreadsheetPath: toSpreadsheetPath,
                     from: from ?? 15.November(2024),
                     to: to ?? 18.November(2024),
+                    throughputSelectionStrategy: new InSameOrder(),
                     runs,
                     dayToStartForecastingFrom ?? 17.November(year: 2014));
         }
