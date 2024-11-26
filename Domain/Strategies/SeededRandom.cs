@@ -1,15 +1,13 @@
-﻿using Domain;
-
-namespace Domain.Strategies
+﻿namespace Domain.Strategies
 {
     public class SeededRandom : IThroughputSelectionStrategy
     {
         private Period period;
-        private readonly Random random;
+        private readonly System.Random random;
 
         public SeededRandom(int seed)
         {
-            this.random = new Random(Seed: seed);
+            this.random = new System.Random(Seed: seed);
         }
 
         private int NextValue()

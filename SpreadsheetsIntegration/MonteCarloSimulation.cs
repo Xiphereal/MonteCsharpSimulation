@@ -3,6 +3,7 @@ using CsvHelper.Configuration;
 using System.Globalization;
 using Domain;
 using Domain.Strategies;
+using Random = Domain.Strategies.Random;
 
 namespace SpreadsheetsIntegration
 {
@@ -20,10 +21,12 @@ namespace SpreadsheetsIntegration
             string toSpreadsheetPath,
             DateTime from,
             DateTime to,
-            IThroughputSelectionStrategy throughputSelectionStrategy,
             int runs,
-            DateTime dayToStartForecastingFrom)
+            DateTime dayToStartForecastingFrom,
+            IThroughputSelectionStrategy? throughputSelectionStrategy = null)
         {
+            throughputSelectionStrategy ??= new Random();
+            
             IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
 
             var completions = Simulation
