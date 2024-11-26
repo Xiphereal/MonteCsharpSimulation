@@ -8,11 +8,12 @@ namespace SpreadsheetsIntegration
         public Configuration(
             int Runs,
             IThroughputSelectionStrategy? ThroughputSelectionStrategy,
-            string nameOfHeaderForDeliveredTasksDates = "Delivered")
+            string? NameOfHeaderForDeliveredTasksDates = null)
         {
             this.Runs = Runs;
             this.ThroughputSelectionStrategy = ThroughputSelectionStrategy ?? new Random();
-            this.NameOfHeaderForDeliveredTasksDates = nameOfHeaderForDeliveredTasksDates;
+            this.NameOfHeaderForDeliveredTasksDates =
+                NameOfHeaderForDeliveredTasksDates ?? "Delivered";
         }
 
 

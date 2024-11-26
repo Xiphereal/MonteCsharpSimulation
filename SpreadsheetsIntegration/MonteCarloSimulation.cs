@@ -10,6 +10,7 @@ namespace SpreadsheetsIntegration
     public static class MonteCarloSimulation
     {
         private const string Delimiter = ";";
+
         private static readonly CsvConfiguration CsvConfiguration =
             new(CultureInfo.InvariantCulture)
             {
@@ -24,7 +25,9 @@ namespace SpreadsheetsIntegration
             DateTime dayToStartForecastingFrom,
             Configuration config)
         {
-            IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
+            IEnumerable<TaskRecord> tasks = Read(
+                fromSpreadsheetPath,
+                config.NameOfHeaderForDeliveredTasksDates);
 
             var completions = Simulation
                 .From(
@@ -50,55 +53,30 @@ namespace SpreadsheetsIntegration
                             Occurrences = x.Occurrences
                         }));
         }
-        
-        public static void Simulate(
+
+        private static IReadOnlyList<TaskRecord> Read(
             string fromSpreadsheetPath,
-            string toSpreadsheetPath,
-            DateTime from,
-            DateTime to,
-            DateTime dayToStartForecastingFrom,
-            int runs,
-            IThroughputSelectionStrategy? throughputSelectionStrategy = null)
-        {
-            throughputSelectionStrategy ??= new Random();
-            
-            IEnumerable<TaskRecord> tasks = Read(fromSpreadsheetPath);
-
-            var completions = Simulation
-                .From(
-                    new Period(
-                        from,
-                        to,
-                        tasksCompletionDates: tasks
-                            .Where(x => x.Delivered.HasValue)
-                            .Select(x => x.Delivered!.Value)))
-                .For(
-                    numberOfTasks: 1,
-                    throughputSelectionStrategy,
-                    dayToStartForecastingFrom,
-                    runs);
-
-            Write(
-                toSpreadsheetPath,
-                completions
-                    .Select(
-                        x => new CompletionRecord
-                        {
-                            When = x.When,
-                            Occurrences = x.Occurrences
-                        }));
-        }
-
-        private static IReadOnlyList<TaskRecord> Read(string fromSpreadsheetPath)
+            string nameOfHeaderForDeliveredTasksDates)
         {
             if (!File.Exists(fromSpreadsheetPath))
                 throw new FileNotFoundException();
 
             using var reader = new StreamReader(fromSpreadsheetPath);
             using var csv = new CsvReader(reader, CsvConfiguration);
-            csv.Context.RegisterClassMap<TaskRecordMap>();
+            csv.Context.RegisterClassMap(
+                CreateTaskRecordMapWith(nameOfHeaderForDeliveredTasksDates));
 
             return csv.GetRecords<TaskRecord>().ToArray();
+        }
+
+        private static TaskRecordMap CreateTaskRecordMapWith(string headerName)
+        {
+            var map = new TaskRecordMap();
+
+            var property = typeof(TaskRecord).GetProperty(nameof(TaskRecord.Delivered));
+            map.Map(typeof(TaskRecord), property!).Name(headerName);
+
+            return map;
         }
 
         private static void Write(
@@ -125,7 +103,6 @@ namespace SpreadsheetsIntegration
             public TaskRecordMap()
             {
                 Map(m => m.Delivered)
-                    .Name("Delivered")
                     .TypeConverterOption
                     .Format(
                         "dd/MM/yyyy HH:mm",

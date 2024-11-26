@@ -16,6 +16,9 @@ namespace SpreadsheetsIntegration.Tests
 
         private const string PathOfSourceSpreadsheetWithTasksWithoutTime =
             "./Files/SomeTasksDeliveredHaveNoTime.csv";
+        
+        private const string PathOfSourceSpreadsheetWithCustomHeaderForDeliveredTasksDates =
+            "./Files/HeaderForDeliveredTasksDatesIsCustom.csv";
 
         [Test]
         public void Acceptance()
@@ -121,6 +124,16 @@ namespace SpreadsheetsIntegration.Tests
             sutInvocation.Should().Throw<FileNotFoundException>();
         }
 
+        [Test]
+        public void HeaderNameForDeliveredTasksDates_CanBeConfigured()
+        {
+            MonteCarloSimulation(
+                PathOfSourceSpreadsheetWithCustomHeaderForDeliveredTasksDates,
+                PathOfResultCsv,
+                nameOfHeaderForDeliveredTasksDates: "This is a custom header");
+            
+            File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
+        }
 
         [TearDown]
         public void TearDown()
@@ -135,7 +148,8 @@ namespace SpreadsheetsIntegration.Tests
             DateTime? from = null,
             DateTime? to = null,
             DateTime? dayToStartForecastingFrom = null,
-            int runs = 1)
+            int runs = 1,
+            string? nameOfHeaderForDeliveredTasksDates = null)
         {
             SpreadsheetsIntegration.MonteCarloSimulation
                 .Simulate(
@@ -145,7 +159,7 @@ namespace SpreadsheetsIntegration.Tests
                     to: to ?? 18.November(2024),
                     dayToStartForecastingFrom: dayToStartForecastingFrom ??
                                                17.November(year: 2014),
-                    new Configuration(runs, new InSameOrder()));
+                    new Configuration(runs, new InSameOrder(), nameOfHeaderForDeliveredTasksDates));
         }
     }
 }
