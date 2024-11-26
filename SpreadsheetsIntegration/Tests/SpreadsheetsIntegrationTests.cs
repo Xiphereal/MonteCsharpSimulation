@@ -143,8 +143,9 @@ namespace SpreadsheetsIntegration.Tests
                     toSpreadsheetPath: toSpreadsheetPath,
                     from: from ?? 15.November(2024),
                     to: to ?? 18.November(2024),
-                    dayToStartForecastingFrom: dayToStartForecastingFrom ?? 17.November(year: 2014),
-                    new Configuration(runs,  new InSameOrder()));
+                    dayToStartForecastingFrom: dayToStartForecastingFrom ??
+                                               17.November(year: 2014),
+                    new Configuration(runs, new InSameOrder()));
         }
     }
 }

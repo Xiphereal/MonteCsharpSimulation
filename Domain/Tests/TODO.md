@@ -7,3 +7,4 @@
 - feat: allow specifying the header names to prevent users from changing their spreadsheets headers just for this to
   work
 - feat: ensure Completions are written into the result CSV with the same culture the read Period had
+- feat: default dayToStartForecastingFrom to Today
