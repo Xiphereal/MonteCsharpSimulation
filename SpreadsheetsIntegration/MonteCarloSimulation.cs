@@ -38,7 +38,7 @@ namespace SpreadsheetsIntegration
                             .Where(x => x.Delivered.HasValue)
                             .Select(x => x.Delivered!.Value)))
                 .For(
-                    numberOfTasks: 1,
+                numberOfTasks: config.TasksToBeCompleted,
                     config.ThroughputSelectionStrategy,
                     dayToStartForecastingFrom,
                     config.Runs);

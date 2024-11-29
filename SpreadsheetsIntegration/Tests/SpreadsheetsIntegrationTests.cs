@@ -16,7 +16,7 @@ namespace SpreadsheetsIntegration.Tests
 
         private const string PathOfSourceSpreadsheetWithTasksWithoutTime =
             "./Files/SomeTasksDeliveredHaveNoTime.csv";
-        
+
         private const string PathOfSourceSpreadsheetWithCustomHeaderForDeliveredTasksDates =
             "./Files/HeaderForDeliveredTasksDatesIsCustom.csv";
 
@@ -93,6 +93,27 @@ namespace SpreadsheetsIntegration.Tests
                     "11/18/2014 00:00:00;1");
         }
 
+
+        [Test]
+        public void NumberOfTasksToBeCompleted_CanBeConfigured()
+        {
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv,
+                tasksToBeCompleted: 1);
+
+            var predictionForSingleTaskToBeCompleted = 
+                File.ReadLines(PathOfResultCsv).Last();
+            
+            MonteCarloSimulation(
+                fromSpreadsheetPath: PathOfSourceSpreadsheet,
+                toSpreadsheetPath: PathOfResultCsv,
+                tasksToBeCompleted: 20);
+            
+            File.ReadLines(PathOfResultCsv).Last()
+                .Should().NotBe(predictionForSingleTaskToBeCompleted);
+        }
+
         [Test]
         public void TasksNotDeliveredYet_AreReadButNotTakenIntoAccount()
         {
@@ -131,7 +152,7 @@ namespace SpreadsheetsIntegration.Tests
                 PathOfSourceSpreadsheetWithCustomHeaderForDeliveredTasksDates,
                 PathOfResultCsv,
                 nameOfHeaderForDeliveredTasksDates: "This is a custom header");
-            
+
             File.ReadLines(PathOfResultCsv).Should().NotBeEmpty();
         }
 
@@ -149,7 +170,8 @@ namespace SpreadsheetsIntegration.Tests
             DateTime? to = null,
             DateTime? dayToStartForecastingFrom = null,
             int runs = 1,
-            string? nameOfHeaderForDeliveredTasksDates = null)
+            string? nameOfHeaderForDeliveredTasksDates = null,
+            int tasksToBeCompleted = 1)
         {
             SpreadsheetsIntegration.MonteCarloSimulation
                 .Simulate(
@@ -159,7 +181,11 @@ namespace SpreadsheetsIntegration.Tests
                     to: to ?? 18.November(2024),
                     dayToStartForecastingFrom: dayToStartForecastingFrom ??
                                                17.November(year: 2014),
-                    new Configuration(runs, new InSameOrder(), nameOfHeaderForDeliveredTasksDates));
+                    new Configuration(
+                        tasksToBeCompleted,
+                        runs,
+                        new InSameOrder(),
+                        nameOfHeaderForDeliveredTasksDates));
         }
     }
 }
