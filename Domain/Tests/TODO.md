@@ -6,3 +6,4 @@
 - feat: ensure Completions are written into the result CSV with the same culture the read Period had
 - test: e2e where the entrypoint is referenced as package. Can simulation be run with what is packaged? How to automate
   updating the package version? Should it be from nuget or can it be used just from a package, created locally?
+- feat: make this compatible with the lowest .NET version possible. May it be on .NET Standard?
