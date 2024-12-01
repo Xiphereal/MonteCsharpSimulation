@@ -93,7 +93,6 @@ namespace SpreadsheetsIntegration.Tests
                     "11/18/2014 00:00:00;1");
         }
 
-
         [Test]
         public void NumberOfTasksToBeCompleted_CanBeConfigured()
         {
@@ -139,10 +138,22 @@ namespace SpreadsheetsIntegration.Tests
         {
             var sutInvocation = () =>
                 MonteCarloSimulation(
-                    fromSpreadsheetPath: "Path/WhereThereIsNo/Spreadsheet",
+                    fromSpreadsheetPath: "Path/WhereThereIsNo/Spreadsheet.csv",
                     toSpreadsheetPath: PathOfResultCsv);
 
             sutInvocation.Should().Throw<FileNotFoundException>();
+        }
+
+        [Test]
+        public void ThrowsIfSourceIsNotCsv()
+        {
+            var sutInvocation = () => MonteCarloSimulation(
+                fromSpreadsheetPath: "NonCsv.txt",
+                toSpreadsheetPath: PathOfResultCsv);
+
+            sutInvocation.Should().Throw<ArgumentException>()
+                .WithMessage("The source spreadsheet is not a CSV file. " +
+                             "Please, export it as a CSV in order to be used for simulation.");
         }
 
         [Test]

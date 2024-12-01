@@ -37,7 +37,7 @@ namespace SpreadsheetsIntegration
                             .Where(x => x.Delivered.HasValue)
                             .Select(x => x.Delivered!.Value)))
                 .For(
-                numberOfTasks: config.TasksToBeCompleted,
+                    numberOfTasks: config.TasksToBeCompleted,
                     config.ThroughputSelectionStrategy,
                     config.DayToStartForecastingFrom,
                     config.Runs);
@@ -57,6 +57,11 @@ namespace SpreadsheetsIntegration
             string fromSpreadsheetPath,
             string nameOfHeaderForDeliveredTasksDates)
         {
+            if (Path.GetExtension(fromSpreadsheetPath) != ".csv")
+                throw new ArgumentException(
+                    "The source spreadsheet is not a CSV file. " +
+                    "Please, export it as a CSV in order to be used for simulation.");
+            
             if (!File.Exists(fromSpreadsheetPath))
                 throw new FileNotFoundException();
 
