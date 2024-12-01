@@ -4,6 +4,5 @@
 - feat: what if there is any issue reading/writing to the disk? Permissions, free space, etc.
 - test: a bunch of tasks cannot be completed on single day if there isn't a day with, at least, that throughput
 - feat: ensure Completions are written into the result CSV with the same culture the read Period had
-- feat: default dayToStartForecastingFrom to Today
 - test: e2e where the entrypoint is referenced as package. Can simulation be run with what is packaged? How to automate
   updating the package version? Should it be from nuget or can it be used just from a package, created locally?
