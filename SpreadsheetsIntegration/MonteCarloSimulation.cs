@@ -22,7 +22,6 @@ namespace SpreadsheetsIntegration
             string toSpreadsheetPath,
             DateTime from,
             DateTime to,
-            DateTime dayToStartForecastingFrom,
             Configuration config)
         {
             IEnumerable<TaskRecord> tasks = Read(
@@ -40,7 +39,7 @@ namespace SpreadsheetsIntegration
                 .For(
                 numberOfTasks: config.TasksToBeCompleted,
                     config.ThroughputSelectionStrategy,
-                    dayToStartForecastingFrom,
+                    config.DayToStartForecastingFrom,
                     config.Runs);
 
             Write(
